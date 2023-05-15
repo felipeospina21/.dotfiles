@@ -6,7 +6,12 @@ unsetopt autocd beep extendedglob notify
 bindkey -e
 zstyle :compinstall filename '/home/felipe/.zshrc'
 
-# End of lines added by compinstall
+source_if_exists () {
+    if test -r "$1"; then
+        source "$1"
+    fi
+}
+
 # eval "$(oh-my-posh init zsh)"
 # eval "$(oh-my-posh --init --shell bash --config ~/custom_kali.omp.json)"
 
@@ -28,7 +33,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # import ENV variables 
-source ${HOME}/var.txt
+source_if_exists ${HOME}/var.txt
 export RIPGREP_CONFIG_PATH="~/.config/ripgrep/.ripgreprc"
 export PATH="$HOME:$PATH"
 

@@ -10,11 +10,18 @@ zstyle :compinstall filename '/home/felipe/.zshrc'
 # eval "$(oh-my-posh init zsh)"
 # eval "$(oh-my-posh --init --shell bash --config ~/custom_kali.omp.json)"
 
+# Linux Homebrew
+test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+test -r ~/.bash_profile && echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bash_profile
+echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.profile
+
 # Aliases
-alias ls='ls --color=auto'
+alias ls='exa -lh --icons --sort=ext'
+alias la='exa -lha --icons --sort=ext'
 alias cls='clear'
-alias nvim='~/nvim/nvim-linux64/bin/nvim'
 alias lg='lazygit'
+alias npk='npx npkill'
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -23,6 +30,7 @@ export NVM_DIR="$HOME/.nvm"
 # import ENV variables 
 source ${HOME}/var.txt
 export RIPGREP_CONFIG_PATH="~/.config/ripgrep/.ripgreprc"
+export PATH="$HOME:$PATH"
 
 # nvm autmoatic use of .nvmrc
 autoload -U add-zsh-hook

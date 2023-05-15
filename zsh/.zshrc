@@ -7,8 +7,8 @@ bindkey -e
 zstyle :compinstall filename '/home/felipe/.zshrc'
 
 # End of lines added by compinstall
-eval "$(oh-my-posh init zsh)"
-eval "$(oh-my-posh --init --shell bash --config ~/custom_kali.omp.json)"
+# eval "$(oh-my-posh init zsh)"
+# eval "$(oh-my-posh --init --shell bash --config ~/custom_kali.omp.json)"
 
 # Aliases
 alias ls='ls --color=auto'
@@ -67,3 +67,5 @@ zcomet load zsh-users/zsh-autosuggestions
 
 # Run compinit and compile its cache
 zcomet compinit
+
+eval "$(starship init zsh)"

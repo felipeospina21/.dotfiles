@@ -49,7 +49,7 @@ style_user = 'bold cyan'
 [directory]
 format = '\[[$path]($style)[$read_only]($read_only_style)\] '
 style = 'bold #88baba'
-read_only = " "
+read_only = "  "
 truncation_length = 2
 
 [character]

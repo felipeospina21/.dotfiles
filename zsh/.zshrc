@@ -12,9 +12,6 @@ source_if_exists () {
     fi
 }
 
-# eval "$(oh-my-posh init zsh)"
-# eval "$(oh-my-posh --init --shell bash --config ~/custom_kali.omp.json)"
-
 # Linux Homebrew
 test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
 test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -35,7 +32,7 @@ export NVM_DIR="$HOME/.nvm"
 # import ENV variables 
 source_if_exists ${HOME}/var.txt
 export RIPGREP_CONFIG_PATH="~/.config/ripgrep/.ripgreprc"
-export PATH="$HOME:$PATH"
+export PATH="$HOME:"$HOME/.local/bin":$PATH"
 
 # nvm autmoatic use of .nvmrc
 autoload -U add-zsh-hook

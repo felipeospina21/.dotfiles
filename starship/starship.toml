@@ -14,6 +14,8 @@ $line_break\
 [└─](white)$character\
 """
 
+command_timeout = 500
+
 [git_branch]
 format = '[$symbol$branch(:$remote_branch)]($style) '
 

@@ -9,6 +9,16 @@ function take {
     cd $1
 }
 
+# Git
+alias gb='git branch | fzf | xargs git checkout'
+alias git-current-branch="git branch | grep \* | cut -d ' ' -f2"
+alias gaa='git add .'
+
 function gp {
     git push origin $@
+}
+
+function gpb {
+    local curr_branch=`git-current-branch`
+    git push origin $curr_branch $@
 }

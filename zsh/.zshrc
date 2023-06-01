@@ -27,3 +27,5 @@ export PATH="$HOME:"$HOME/.local/bin":$PATH"
 
 
 eval "$(starship init zsh)"
+
+[[ -s "/home/felipe/.gvm/scripts/gvm" ]] && source "/home/felipe/.gvm/scripts/gvm"

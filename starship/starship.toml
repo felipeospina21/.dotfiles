@@ -6,10 +6,9 @@ $git_branch\
 $git_commit\
 $git_state\
 $git_metrics\
-$git_status\
+$git_status  $jobs\
 $fill\
-$nodejs\
-$cmd_duration $jobs\
+$cmd_duration $nodejs\
 $line_break\
 [└─](white)$character\
 """

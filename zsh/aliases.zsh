@@ -1,6 +1,7 @@
 alias ls='exa -lh --icons --sort=ext'
 alias la='exa -lha --icons --sort=ext'
 alias cls='clear'
+alias gg='lazygit'
 alias lg='lazygit'
 alias npk='npx npkill'
 
@@ -13,6 +14,11 @@ function take {
 alias gb='git branch | fzf | xargs git checkout'
 alias git-current-branch="git branch | grep \* | cut -d ' ' -f2"
 alias gaa='git add .'
+
+# Node (projects)
+alias tc='npm run type-check'
+alias gq='npm run gql:gen'
+alias ci='npm run ci-check'
 
 function gp {
     git push origin $@

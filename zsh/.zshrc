@@ -12,7 +12,7 @@ source_if_exists () {
     fi
 }
 
-source_if_exists $DOTFILES/zsh/aliases.zsh
+source_if_exists $DOTFILES/zsh/.bash_aliases
 source_if_exists $DOTFILES/zsh/load_nvmrc.zsh
 source_if_exists $DOTFILES/zsh/plugins.zsh
 

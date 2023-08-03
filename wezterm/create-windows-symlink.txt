@@ -1,0 +1,1 @@
+New-Item -ItemType SymbolicLink -Path C:\Users\felip\.config\wezterm -Target \wsl$\Ubuntu\home\felipe\.dotfiles\wezterm

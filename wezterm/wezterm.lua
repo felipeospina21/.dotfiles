@@ -1,5 +1,3 @@
-local os = require("os")
-local io = require("io")
 local wezterm = require("wezterm")
 local mux = wezterm.mux
 local wsl_domains = wezterm.default_wsl_domains()

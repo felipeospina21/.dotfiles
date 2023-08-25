@@ -19,21 +19,25 @@ alias ci='npm run ci-check'
 alias jlm='jira issue list -a$(jira me)'
 
 
+# take -> create a dir & cd to it
 function take {
     mkdir -p $1
     cd $1
 }
 
-function gp {
-    git push origin $@
-}
-
+# gpb -> push current branch into origin
 function gpb {
     local curr_branch=`git-current-branch`
     git push origin $curr_branch $@
 }
 
+# gmr -> fetch remote MR branch to review & checkout into it
 function gmr {
     git fetch $1 merge-requests/$2/head:mr-$1-$2
     git checkout mr-$1-$2
+}
+
+# fun -> search & prints a custom function name
+function fun {
+    cat $HOME/.dotfiles/zsh/.bash_aliases | grep -A${2:-1} $1
 }

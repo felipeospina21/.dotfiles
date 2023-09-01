@@ -40,5 +40,5 @@ function gmr {
 
 # fun -> search & prints a custom function name
 function fun {
-	cat """$HOME"/.dotfiles/zsh/.bash_aliases | grep -A"${2:-1}" "$1"
+	cat "$HOME"/.dotfiles/zsh/.bash_aliases | grep -A"${2:-1}" "$1"
 }

@@ -18,7 +18,7 @@ alias nvm="unalias nvm; [[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh"; nvm $
 source_if_exists () {
     if test -r "$1"; then
         source "$1"
-    else if
+    else 
         echo "Couldn't find $1"
     fi
 }

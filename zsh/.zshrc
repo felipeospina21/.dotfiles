@@ -6,25 +6,31 @@ unsetopt autocd beep extendedglob notify
 bindkey -e
 zstyle :compinstall filename "$HOME/.zshrc"
 
+export DOTFILES=$HOME/.dotfiles
+
 # Version managers
 alias gvm="unalias gvm;  [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"; gvm $@"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 alias nvm="unalias nvm; [[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh"; nvm $@"
 
 source_if_exists () {
     if test -r "$1"; then
         source "$1"
+    else if
+        echo "Couldn't find $1"
     fi
 }
 
 source_if_exists $DOTFILES/zsh/.bash_aliases
+source_if_exists $DOTFILES/zsh/zshenv
 source_if_exists $DOTFILES/zsh/load_nvmrc.zsh
+source_if_exists $DOTFILES/zsh/completion.zsh
 source_if_exists $DOTFILES/zsh/plugins.zsh
 
-# import ENV variables
-export PATH="$HOME:"$HOME/.local/bin":$PATH"
-
 eval "$(starship init zsh)"
-eval "$(atuin init zsh)"
+zvm_after_init_commands+=(eval "$(atuin init zsh)")
 
 # Linux Homebrew
 test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"

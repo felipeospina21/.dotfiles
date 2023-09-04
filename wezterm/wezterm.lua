@@ -113,13 +113,6 @@ local config = {
 	},
 }
 
-wezterm.on("gui-startup", function(cmd)
-	local _, _, window = mux.spawn_window(cmd or { cwd = cwd })
-	window:gui_window():maximize()
-	-- local _, pane, _ = window:spawn_tab({ cwd = cwd })
-	-- pane:split({ size = 0.5, cwd = cwd })
-end)
-
 wezterm.on("format-tab-title", function(tab)
 	local background = "transparent"
 	local foreground = tab_fg_inactive
@@ -146,6 +139,13 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	config.wsl_domains = wsl_domains
 	config.default_domain = "WSL:Ubuntu"
 	-- default_prog = { "wsl.exe", "~", "-d", "Ubuntu-20.04" }
+	--
+	wezterm.on("gui-startup", function(cmd)
+		local _, _, window = mux.spawn_window(cmd or { cwd = cwd })
+		window:gui_window():maximize()
+		-- local _, pane, _ = window:spawn_tab({ cwd = cwd })
+		-- pane:split({ size = 0.5, cwd = cwd })
+	end)
 end
 
 if wezterm.target_triple == "x86_64-apple-darwin" then

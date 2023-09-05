@@ -7,10 +7,11 @@ git_color_text() {
 }
 
 get_branches() {
+	# shellcheck disable=2046
 	if [ "${1+x}" ]; then
-		gum choose --selected.foreground="$GIT_COLOR" --limit="$1" "$(git branch --format="%(refname:short)")"
+		gum choose --selected.foreground="$GIT_COLOR" --limit="$1" $(git branch --format="%(refname:short)")
 	else
-		gum choose --selected.foreground="$GIT_COLOR" --no-limit "$(git branch --format="%(refname:short)")"
+		gum choose --selected.foreground="$GIT_COLOR" --no-limit $(git branch --format="%(refname:short)")
 	fi
 }
 

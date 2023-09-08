@@ -42,3 +42,12 @@ function gmr {
 function fun {
 	cat "$HOME"/.dotfiles/zsh/.bash_aliases | grep -A"${2:-1}" "$1"
 }
+
+function zsh_init_mes {
+	# seq prints sequences of numbers. We use it with for .. in loop to run the commands 10 times
+	# time is a utility command to execute a command and then print out time used
+	# -i running zsh in interactive mode - meaning we can run (or pass) commands to it to execute
+	# -c tells zsh to take the next part which is exit as a command to execute, not as a parameter
+
+	for i in $(seq 1 10); do /usr/bin/time zsh -i -c exit; done
+}

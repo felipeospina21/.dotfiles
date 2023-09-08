@@ -37,6 +37,7 @@ yabai -m rule --add app="^QuickTime Player$" manage=off
 yabai -m rule --add app="^WezTerm$" space=1
 yabai -m rule --add app="^Firefox$" space=2
 yabai -m rule --add app="^Zoom$" space=^3
-yabai -m rule --add app="^Slack$" display=2 || yabai -m rule --add app="^Slack$" space=3
+yabai -m rule --add app="^Slack$" space=3
+# yabai -m rule --add app="^Slack$" display=2 || yabai -m rule --add app="^Slack$" space=3
 
  

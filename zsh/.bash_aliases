@@ -32,6 +32,13 @@ function gpb {
 	git push origin "$curr_branch" "$@"
 }
 
+# gpbf -> force with lease & don't verify push current branch into origin
+function gpbf {
+	local curr_branch
+	curr_branch=$(git-current-branch)
+	git push origin "$curr_branch" --no-verify --force-with-lease
+}
+
 # gmr -> fetch remote MR branch to review & checkout into it
 function gmr {
 	git fetch "$1" merge-requests/"$2/head:mr-$1-$2"

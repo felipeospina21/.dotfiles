@@ -10,7 +10,6 @@ nvm_echo() {
 }
 
 nvm_find_up() {
-
     local path_
     path_="${PWD}"
     while [ "${path_}" != "" ] && [ "${path_}" != '.' ] && [ ! -f "${path_}/${1-}" ]; do
@@ -28,9 +27,9 @@ nvm_find_nvmrc() {
 }
 
 load-nvmrc() {
-    alias nvm="unalias nvm; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm $@"
 
     if [[ -f "$PWD/package.json" ]]; then
+        nvm current
         local node_version="$(nvm version)"
         local nvmrc_path="$(nvm_find_nvmrc)"
 

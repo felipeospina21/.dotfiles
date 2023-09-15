@@ -7,7 +7,7 @@ sketchybar --add item wifi.control right \
 	--set wifi.control icon=$WIFI_ICN \
 	label.drawing=off \
 	click_script="$POPUP_CLICK_SCRIPT" \
-	popup.background.color=0x70000000 \
+	popup.background.color="${TRANSPARENT_BLACK}" \
 	popup.blur_radius=50 \
 	popup.background.corner_radius=5 \
 	\

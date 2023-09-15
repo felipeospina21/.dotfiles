@@ -6,6 +6,9 @@ alias gg='lazygit'
 alias lg='lazygit'
 alias npk='npx npkill'
 
+alias mac-keys='bat $DOTFILES/skhd/skhdrc'
+alias mks='mac-keys | fzf'
+
 # Git
 alias gb='git branch | fzf | xargs git checkout'
 alias git-current-branch="git branch | grep \* | cut -d ' ' -f2"

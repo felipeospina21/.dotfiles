@@ -13,7 +13,8 @@ sketchybar --bar height=30        \
                  padding_left=10  \
                  padding_right=10 \
                  color=0x25ffffff \
-                 shadow=on
+                 shadow=on \
+                 sticky=off
 
 sketchybar --default updates=when_shown                       \
                      drawing=on                               \

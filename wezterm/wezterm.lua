@@ -12,6 +12,8 @@ local config = {
 	enable_tab_bar = true,
 	tab_bar_at_bottom = true,
 	use_fancy_tab_bar = false,
+	send_composed_key_when_left_alt_is_pressed = false,
+	send_composed_key_when_right_alt_is_pressed = false,
 	window_padding = { left = 2, right = 0, top = 3, bottom = 0 },
 	font_size = 10.5,
 	leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },

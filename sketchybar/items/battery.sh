@@ -5,4 +5,4 @@ sketchybar --add item battery right \
 	update_freq=60*5 \
 	--subscribe battery system_woke
 
-sketchybar --add alias "Control Center,Battery" right
+# sketchybar --add alias "Control Center,Battery" right

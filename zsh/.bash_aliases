@@ -13,6 +13,12 @@ alias mks='mac-keys | fzf'
 alias gb='git branch | fzf | xargs git checkout'
 alias git-current-branch="git branch | grep \* | cut -d ' ' -f2"
 alias gaa='git add .'
+alias gp='git pull'
+
+# Zsh
+alias up_alias='nvim $DOTFILES/zsh/.bash_aliases'
+alias up_zsh='nvim $DOTFILES/zsh/.zshrc'
+alias up_zsh_fold='nvim $DOTFILES/zsh'
 
 # Node (projects)
 alias tc='npm run type-check'

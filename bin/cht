@@ -1,0 +1,29 @@
+#!/bin/bash
+
+output_file="/tmp/cht_res.txt"
+
+print_response() {
+	wezterm cli split-pane --right --percent 40 -- less -R $output_file
+}
+
+list=("js" "ts" "react" "git" "go")
+
+language=$(gum choose "${list[@]}")
+echo "$language"
+
+query="$(gum input --width 50 --placeholder "Query")"
+echo "$query"
+
+if [ -n "$language" ] && [ -n "$query" ]; then
+	formated_query=$(echo "$query" | tr " " "+")
+	curl cht.sh/"$language"/"$formated_query" >$output_file
+	print_response
+
+elif [ -n "$language" ]; then
+	curl cht.sh/"$language" >$output_file
+	print_response
+
+else
+	echo "No selection"
+
+fi

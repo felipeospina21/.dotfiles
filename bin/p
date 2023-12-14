@@ -1,0 +1,17 @@
+#!/bin/bash
+
+base_path="$HOME/projects"
+
+# get_dirs(){
+#   fd --type d --max-depth 1 --base-directory $1 . | gum choose
+# }
+# selected_dir=$(get_dirs $base_path)
+
+selected_dir=$(fd --type d --max-depth 1 --base-directory "$base_path" . | fzf --prompt="Select a directory: " --preview="exa -lh --icons --sort=ext $base_path/{}")
+
+if [ -n "$selected_dir" ]; then
+	wezterm cli spawn --cwd "$base_path/$selected_dir"
+
+else
+	echo "No directory selected. Exiting."
+fi

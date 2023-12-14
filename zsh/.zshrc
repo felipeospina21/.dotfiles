@@ -23,6 +23,7 @@ source_if_exists $DOTFILES/zsh/zshenv
 source_if_exists $DOTFILES/zsh/completion.zsh
 source_if_exists $DOTFILES/zsh/plugins.zsh
 source_if_exists $DOTFILES/zsh/load_nvmrc.zsh
+source_if_exists $DOTFILES/zsh/load_gvm.zsh
 
 eval "$(starship init zsh)"
 zvm_after_init_commands+=(eval "$(atuin init zsh)")

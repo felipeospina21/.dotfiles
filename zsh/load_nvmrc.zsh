@@ -32,6 +32,7 @@ load-nvmrc() {
         nvm current
         local node_version="$(nvm version)"
         local nvmrc_path="$(nvm_find_nvmrc)"
+        echo $node_version
 
         if [ -n "$nvmrc_path" ]; then
             local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")

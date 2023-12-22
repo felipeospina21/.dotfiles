@@ -56,7 +56,7 @@ function gmr {
 
 # fun -> search & prints a custom function name
 function fun {
-	cat "$HOME"/.dotfiles/zsh/.bash_aliases | grep -A"${2:-1}" "$1"
+	cat <"$HOME"/.dotfiles/zsh/.bash_aliases | grep -A"${2:-1}" "$1" | bat || less
 }
 
 function zsh_init_mes {
@@ -65,5 +65,5 @@ function zsh_init_mes {
 	# -i running zsh in interactive mode - meaning we can run (or pass) commands to it to execute
 	# -c tells zsh to take the next part which is exit as a command to execute, not as a parameter
 
-	for i in $(seq 1 10); do /usr/bin/time zsh -i -c exit; done
+	for _ in $(seq 1 10); do /usr/bin/time zsh -i -c exit; done
 }

@@ -38,7 +38,7 @@ load-gvm() {
             if [ "$gomod_go_version" != "$go_default_version" ]; then
                 gvm applymod
             else
-                echo $gomod_go_version
+                gvm use $go_default_version
             fi
 
         elif [ "$go_default_version" != "$(get_gvm_default '${gomod_path}')" ]; then

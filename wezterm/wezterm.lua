@@ -14,7 +14,7 @@ local config = {
 	use_fancy_tab_bar = false,
 	send_composed_key_when_left_alt_is_pressed = false,
 	send_composed_key_when_right_alt_is_pressed = false,
-	window_padding = { left = 2, right = 0, top = 3, bottom = 0 },
+	window_padding = { left = 2, right = 0, top = 2, bottom = 0 },
 	font_size = 10.5,
 	leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
 	keys = {
@@ -23,6 +23,11 @@ local config = {
 			key = ",",
 			mods = "LEADER",
 			action = act.SplitPane({ direction = "Right", size = { Percent = 50 } }),
+		},
+		{
+			key = "t",
+			mods = "LEADER",
+			action = act.SplitPane({ direction = "Right", size = { Percent = 35 } }),
 		},
 		{
 			key = "-",

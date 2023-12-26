@@ -1,1 +1,1 @@
-atuin bat bison ca-certificates exa fd gettext gum lazygit libgit2 libidn2 libssh2 libtermkey libunistring libuv libvterm luajit luv msgpack neovim openssl@3 pcre2 ripgrep starship stow tree-sitter unibilium wget wezterm
+atuin bat bison ca-certificates exa fd gettext gum lazygit libgit2 libidn2 libssh2 libtermkey libunistring libuv libvterm luajit luv msgpack neovim openssl@3 pcre2 ripgrep starship stow tree-sitter unibilium wget

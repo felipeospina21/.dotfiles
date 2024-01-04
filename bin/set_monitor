@@ -1,0 +1,9 @@
+#!/bin/bash
+
+externalMontior=$(xrandr | grep 'DisplayPort-[0-9] connected' | cut -d ' ' -f 1)
+echo "$externalMontior"
+
+if [ -n "$externalMontior" ]; then
+	xrandr --output "$externalMontior" --mode 3440x1440 --rate 59.97 --output eDP --off
+
+fi

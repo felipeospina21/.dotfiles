@@ -1,0 +1,9 @@
+#!/bin/bash
+
+isLaptopMonitorActive=$(xrandr --listactivemonitors | grep eDP)
+
+if [ -n "$isLaptopMonitorActive" ]; then
+	xrandr --output eDP --off
+else
+	xrandr --output eDP --auto
+fi

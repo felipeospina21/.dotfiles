@@ -1,6 +1,7 @@
 lastupdatecheck: 0
 recentrepos:
 - /home/felipe/.dotfiles
+- /home/felipe/projects/go/microservices
 startuppopupversion: 5
 customcommandshistory: []
 hidecommandlog: false

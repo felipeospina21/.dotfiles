@@ -1,2 +1,3 @@
 set_monitor &
+picom -f --daemon --config "${HOME}/.config/picom/picom.conf" &
 

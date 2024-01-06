@@ -5,5 +5,8 @@ echo "$externalMontior"
 
 if [ -n "$externalMontior" ]; then
 	xrandr --output "$externalMontior" --mode 3440x1440 --rate 59.97 --output eDP --off
-
+else
+	if command -v brightnessctl &>/dev/null; then
+		brightnessctl set 70%
+	fi
 fi

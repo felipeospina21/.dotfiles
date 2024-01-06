@@ -8,6 +8,7 @@ local cwd = "~/projects"
 
 local config = {
 	-- color_scheme = 'Ocean Dark (Gogh)',
+	warn_about_missing_glyphs = false,
 	color_scheme = "Solarized (dark) (terminal.sexy)",
 	enable_tab_bar = true,
 	tab_bar_at_bottom = true,

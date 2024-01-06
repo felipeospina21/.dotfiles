@@ -1,6 +1,7 @@
 lastupdatecheck: 0
 recentrepos:
 - /home/felipe/.dotfiles
+- /home/felipe/.config/nvim/lua/user
 - /home/felipe/projects/go/microservices
 startuppopupversion: 5
 customcommandshistory: []

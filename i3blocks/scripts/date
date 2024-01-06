@@ -1,0 +1,5 @@
+#!/bin/bash
+
+date '+%h %d - %H:%M'
+date '+%h %d - %H:%M'
+echo "$LAVENDER"

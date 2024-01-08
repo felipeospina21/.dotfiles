@@ -22,8 +22,9 @@ source_if_exists $DOTFILES/zsh/.bash_aliases
 source_if_exists $DOTFILES/zsh/zshenv
 source_if_exists $DOTFILES/zsh/completion.zsh
 source_if_exists $DOTFILES/zsh/plugins.zsh
-source_if_exists $DOTFILES/zsh/load_nvmrc.zsh
-source_if_exists $DOTFILES/zsh/load_gvm.zsh
+# replaced by mise
+# source_if_exists $DOTFILES/zsh/load_nvmrc.zsh
+# source_if_exists $DOTFILES/zsh/load_gvm.zsh
 
 eval "$(starship init zsh)"
 zvm_after_init_commands+=(eval "$(atuin init zsh)")
@@ -34,4 +35,5 @@ test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/bre
 test -r ~/.bash_profile && echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bash_profile
 echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.profile
 
-# zprof
+mise_path=$(whereis mise | awk -F': ' '{print $2}' | awk '{print $1}')
+eval "$("$mise_path" activate zsh)"

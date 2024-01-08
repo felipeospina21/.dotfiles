@@ -1,17 +1,5 @@
 # i3 config file (v4)
-#
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
-#
-# This config file uses keycodes (bindsym) and was written for the QWERTY
-# layout.
-#
-# To get a config file with the same key positions, but for your current
-# layout, use the i3-config-wizard
-#
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-# font pango:Droid Sans Mono 9
 font pango:Ubuntu Nerd Font 9
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
@@ -33,14 +21,8 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-# # start picom
-# exec --no-startup-id pkill picom
-# exec --no-startup-id picom -f --daemon --config "${HOME}/.config/picom/picom.conf"
-
-# exec --no-startup-id ulauncher
-# Use pactl to adjust volume in PulseAudio.
-
 ## Volume control
+# Use pactl to adjust volume in PulseAudio.
 
 # Path to volume control, without trailing slash
 set $volumepath $HOME/.config/i3blocks/scripts

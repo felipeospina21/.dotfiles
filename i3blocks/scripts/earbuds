@@ -1,0 +1,30 @@
+#!/bin/bash
+
+DEVICE="B0:45:02:CB:B9:89"
+IS_ON=$(bluetoothctl info $DEVICE | grep Connected | cut -d ":" -f 2 | xargs)
+
+toggle() {
+	if [ "$1" = "yes" ]; then
+		[ "$button" -eq 1 ] && (bluetoothctl disconnect "$DEVICE" >/dev/null)
+		ICON=󱡏
+		COLOR="$LAVENDER"
+	else
+		[ "$button" -eq 1 ] && (bluetoothctl connect "$DEVICE" >/dev/null)
+		ICON=󱡐
+		COLOR="$RED"
+	fi
+}
+
+if [ "$IS_ON" = "yes" ]; then
+	ICON=󱡐
+	COLOR="$RED"
+	toggle "$IS_ON"
+else
+	ICON=󱡏
+	COLOR="$LAVENDER"
+	toggle "$IS_ON"
+fi
+
+echo $ICON
+echo $ICON
+echo "$COLOR"

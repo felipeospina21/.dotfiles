@@ -6,6 +6,8 @@ sketchybar --add item wifi.control right \
 	\
 	--set wifi.control icon=$WIFI_ICN \
 	label.drawing=off \
+	\
+	background.padding_right=15 \
 	click_script="$POPUP_CLICK_SCRIPT" \
 	popup.background.color="${TRANSPARENT_BLACK}" \
 	popup.blur_radius=50 \
@@ -18,4 +20,4 @@ sketchybar --add item wifi.control right \
 	--add item wifi.speed popup.wifi.control \
 	--set wifi.speed icon=$SPEED_ICN \
 	script="$PLUGIN_DIR/wifi_click.sh" \
-	update_freq=10
+	update_freq=10 # width=50 \

@@ -2,7 +2,7 @@
 
 # Color Palette
 BLACK=0xff181926
-WHITE=0xffcad3f5
+WHITE=0xffffffff
 RED=0xffed8796
 GREEN="0xffa6da95"
 BLUE="0xff8aadf4"

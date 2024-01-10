@@ -1,10 +1,16 @@
 #!/usr/bin/env sh
 
-SPACE_ICONS=("α" "β" "γ" "δ" "ε" "ζ" "η" "θ")
+SPACE_ICONS=("􀩼" "􀎬" "󰒱" "δ" "ε" "ζ" "η" "θ")
 
 for i in "${!SPACE_ICONS[@]}"
 do
     sid=$(($i+1))
+    if [ $sid -eq 3 ];then
+                         F="$FONT":Bold:18.0
+    else
+                         F="$FONT":Bold:15.0
+    fi
+
     sketchybar --add space space.$sid left     \
         --set space.$sid associated_space=$sid     \
                          icon=${SPACE_ICONS[i]}                     \
@@ -19,5 +25,5 @@ do
                          label.drawing=off                          \
                          script="$PLUGIN_DIR/space.sh"              \
                          click_script="yabai -m space --focus $sid" \
-                         icon.font="$FONT:Bold:15.0"
+                         icon.font="$F"
 done

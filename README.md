@@ -2,13 +2,13 @@
 
 ### Scale UI
 Create ~/.Xresources file and add the following line  
-```
+```shell
 # default value 96, this line scales everything 125% (96*1.25)
 Xft.dpi: 120
 ```
 ### Configure monitors
 Create ~/.xprofile with the following line  
-```
+```shell
 # This sets the external monitor with the max resolution & refresh rate, and turns off the laptop monitor
 # This is required for the current multiport adapter
 xrandr --output DisplayPort-1 --mode 3440x1440 --rate 59.97 --output eDP --off
@@ -18,7 +18,7 @@ xrandr --output DisplayPort-1 --mode 3440x1440 --rate 59.97 --output eDP --off
 [Mise](https://mise.jdx.dev) replace the need for nvm and gvm.  
 Install with brew  
 In order to ignore the .mise.toml files globally do the following   
-```
+```shell
 # link .gitignore file from dotfiles
 ln -s $DOTFILES/.gitignore ~/.gitignore
 

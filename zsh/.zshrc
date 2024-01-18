@@ -29,11 +29,5 @@ source_if_exists $DOTFILES/zsh/plugins.zsh
 eval "$(starship init zsh)"
 zvm_after_init_commands+=(eval "$(atuin init zsh)")
 
-# Linux Homebrew
-test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
-test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-test -r ~/.bash_profile && echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bash_profile
-echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.profile
-
 mise_path=$(whereis mise | awk -F': ' '{print $2}' | awk '{print $1}')
 eval "$("$mise_path" activate zsh)"

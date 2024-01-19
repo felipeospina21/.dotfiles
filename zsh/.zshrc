@@ -19,7 +19,6 @@ source_if_exists () {
 }
 
 source_if_exists $DOTFILES/zsh/.bash_aliases
-source_if_exists $DOTFILES/zsh/zshenv
 source_if_exists $DOTFILES/zsh/completion.zsh
 source_if_exists $DOTFILES/zsh/plugins.zsh
 # replaced by mise

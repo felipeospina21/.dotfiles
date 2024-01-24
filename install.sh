@@ -4,8 +4,9 @@ OS=$(uname)
 SCRIPT=$(realpath "$0")
 SCRIPT_PATH=$(dirname "$SCRIPT")
 XDG_CONFIG_HOME="$HOME/.config"
+DOTFILES="$HOME/.dotfiles"
 
-GENERAL_PACKAGES=(stow bat exa fd fzf tree-sitter gum nvim)
+GENERAL_PACKAGES=(stow bat exa fd fzf tree-sitter gum gh nvim)
 LINUX_PACKAGES=(xclip jq brightnessctl pulseaudio-module-bluetooth pulseaudio-equalizer pulseaudio-module-jack alsa-utils playerctl autoreconf)
 
 # install brew
@@ -23,8 +24,8 @@ if [ "$OS" = "Linux" ]; then
 	LINUX_PACKAGES+=("${GENERAL_PACKAGES[@]}")
 	brew install --formula "${LINUX_PACKAGES[@]}"
 
-	ln -s "$HOME/.xprofile" "$HOME/.dotfiles/.xprofile"
-	ln -s "$HOME/.Xresources" "$HOME/.dotfiles/.Xresources"
+	ln -s "$HOME/.xprofile" "$DOTFILES/.xprofile"
+	ln -s "$HOME/.Xresources" "$DOTFILES/.Xresources"
 
 elif [ "$OS" = "Darwin" ]; then
 	brew install --formula "${GENERAL_PACKAGES[@]}"
@@ -39,7 +40,8 @@ fi
 [ ! -d ~/.config ] && mkdir ~/.config
 
 # select packages to install from dotfiles
-DIR_NAMES=$(find . -maxdepth 1 -mindepth 1 -not -path '*/\.*' -type d -printf '%P\n')
+# DIR_NAMES=$(find "$DOTFILES" -maxdepth 1 -mindepth 1 -not -path '*/\.*' -type d -printf '%P\n')
+DIR_NAMES=$(fd -t d --max-depth 1 --base-directory "$DOTFILES" | cut -d "/" -f 1)
 PACKAGES=$(echo "$DIR_NAMES" | sort | gum choose --height 20 --no-limit)
 
 # install selected packages
@@ -55,19 +57,28 @@ echo "$PACKAGES" | while read -r PACKAGE_NAME; do
 	echo "$PACKAGE_NAME installed"
 
 	# symlink package config folder
-	[ ! -d "$XDG_CONFIG_HOME/$PACKAGE_NAME" ] && mkdir "$XDG_CONFIG_HOME/$PACKAGE_NAME"
-	stow -t "$XDG_CONFIG_HOME/$PACKAGE_NAME" "$PACKAGE_NAME"
-	echo "$PACKAGE_NAME config linked"
+	if [ ! -d "$XDG_CONFIG_HOME/$PACKAGE_NAME" ]; then
+		mkdir "$XDG_CONFIG_HOME/$PACKAGE_NAME"
+		stow -t "$XDG_CONFIG_HOME/$PACKAGE_NAME" -d "$DOTFILES" "$PACKAGE_NAME"
+		echo "$PACKAGE_NAME config linked"
+	else
+		echo "$PACKAGE_NAME folder already exist"
+	fi
 
 done
 
 # add global gitgnore
-ln -s "$HOME/.gitignore" "$HOME/.dotfiles/.gitignore"
+ln -s "$HOME/.gitignore" "$DOTFILES/.gitignore"
 git config --global --get core.excludesfile
 
-# TODO: install and config astronvim
-# TODO: add default editor when edit from lazygit (see lazygit docs)
-# TODO: add bin scripts to .local/bin
-# TODO: install go, node, python with mise
-# TODO: install ulaunch for linux
-# TODO: set scripts execution permissions
+# install astronvim & copy config
+git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+git clone https://github.com/felipeospina21/nvim.git ~/.config/nvim/lua/user
+
+# add scripts to path
+stow -t "$HOME/.local/bin" -d "$DOTFILES" bin
+
+#TODO: silence installs & render gum loader & custom messages
+#TODO: install go, node, python with mise
+#TODO: install ulaunch for linux
+#TODO: set scripts execution permissions

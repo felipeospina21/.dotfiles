@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-SPACE_ICONS=("􀩼" "􀎬" "󰒱" "δ" "ε" "ζ" "η" "θ")
+SPACE_ICONS=("􀩼" "􀎬" "󰒱" "􀥲" "ε" "ζ" "η" "θ")
 
 for i in "${!SPACE_ICONS[@]}"
 do

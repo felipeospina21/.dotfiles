@@ -34,7 +34,7 @@ branches=$(get_branches)
 
 echo ""
 echo "Choose a $(git_color_text "command"):"
-command=$(gum choose --cursor.foreground="$GIT_COLOR" rebase delete update)
+command=$(gum choose --cursor.foreground="$GIT_COLOR" rebase delete update checkout)
 echo ""
 
 echo "$branches" | tr " " "\n" | while read -r branch; do
@@ -51,6 +51,9 @@ echo "$branches" | tr " " "\n" | while read -r branch; do
 	update)
 		git checkout "$branch"
 		git pull --ff-only
+		;;
+	checkout)
+		git checkout "$branch"
 		;;
 	esac
 done

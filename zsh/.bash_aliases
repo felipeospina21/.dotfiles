@@ -1,6 +1,7 @@
 #!/bin/bash
-alias ls='exa -lh --icons --sort=ext'
-alias la='exa -lha --icons --sort=ext'
+alias ls=lsReplacement
+alias ll=ll
+alias la=la
 alias cls='clear'
 alias gg='lazygit'
 alias lg='lazygit'
@@ -66,4 +67,34 @@ function zsh_init_mes {
 	# -c tells zsh to take the next part which is exit as a command to execute, not as a parameter
 
 	for _ in $(seq 1 10); do /usr/bin/time zsh -i -c exit; done
+}
+
+function lsReplacement {
+	if command -v eza &>/dev/null; then
+		eza --icons --sort=ext "$@"
+	elif command -v exa &>/dev/null; then
+		exa --icons --sort=ext "$@"
+	else
+		ls --color=always "$@"
+	fi
+}
+
+function ll {
+	if command -v eza &>/dev/null; then
+		eza -lh --icons --sort=ext
+	elif command -v exa &>/dev/null; then
+		exa -lh --icons --sort=ext
+	else
+		ls -l --color=always
+	fi
+}
+
+function la {
+	if command -v eza &>/dev/null; then
+		eza -lha --icons --sort=ext
+	elif command -v exa &>/dev/null; then
+		exa -lha --icons --sort=ext
+	else
+		ls -la --color=always
+	fi
 }

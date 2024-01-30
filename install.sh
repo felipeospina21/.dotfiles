@@ -6,7 +6,7 @@ SCRIPT_PATH=$(dirname "$SCRIPT")
 XDG_CONFIG_HOME="$HOME/.config"
 DOTFILES="$HOME/.dotfiles"
 
-GENERAL_PACKAGES=(stow bat exa fd fzf tree-sitter gum gh nvim)
+GENERAL_PACKAGES=(stow bat eza fd fzf tree-sitter gum gh nvim)
 LINUX_PACKAGES=(xclip jq brightnessctl pulseaudio-module-bluetooth pulseaudio-equalizer pulseaudio-module-jack alsa-utils playerctl autoreconf)
 
 # install brew

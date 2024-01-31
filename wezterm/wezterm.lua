@@ -8,14 +8,15 @@ local cwd = "~/projects"
 
 local config = {
 	-- color_scheme = 'Ocean Dark (Gogh)',
-	warn_about_missing_glyphs = false,
 	color_scheme = "Solarized (dark) (terminal.sexy)",
+	inactive_pane_hsb = { saturation = 0.7, brightness = 0.6 },
+	window_padding = { left = 2, right = 0, top = 2, bottom = 0 },
+	warn_about_missing_glyphs = false,
 	enable_tab_bar = true,
 	tab_bar_at_bottom = true,
 	use_fancy_tab_bar = false,
 	send_composed_key_when_left_alt_is_pressed = false,
 	send_composed_key_when_right_alt_is_pressed = false,
-	window_padding = { left = 2, right = 0, top = 2, bottom = 0 },
 	font_size = 10.5,
 	leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
 	keys = {
@@ -63,6 +64,11 @@ local config = {
 		{
 			key = "z",
 			mods = "LEADER",
+			action = act.TogglePaneZoomState,
+		},
+		{
+			key = "m",
+			mods = "CTRL|SHIFT",
 			action = act.TogglePaneZoomState,
 		},
 

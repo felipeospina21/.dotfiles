@@ -23,7 +23,7 @@ alias up_zsh_fold='nvim $DOTFILES/zsh'
 
 # Node (projects)
 alias tc='npm run type-check'
-alias gq='npm run gql:gen'
+alias gq='npm run gql:gen && npm run lint:fix'
 alias ci='npm run ci-check'
 
 # Jira

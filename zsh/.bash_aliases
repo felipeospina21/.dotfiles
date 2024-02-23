@@ -6,6 +6,8 @@ alias cls='clear'
 alias gg='lazygit'
 alias lg='lazygit'
 alias npk='npx npkill'
+alias zsh-alias='nvim $DOTFILES/zsh/.bash_aliases'
+alias dotfiles='nvim $DOTFILES'
 
 alias mac-keys='bat $DOTFILES/skhd/skhdrc'
 alias mks='mac-keys | fzf'
@@ -23,8 +25,9 @@ alias up_zsh_fold='nvim $DOTFILES/zsh'
 
 # Node (projects)
 alias tc='npm run type-check'
-alias gq='npm run gql:gen && npm run lint:fix'
+alias gq='npm run gql:gen && npm run prettier:fix'
 alias ci='npm run ci-check'
+alias outdated='npx npm-check-updates -i --format group'
 
 # Jira
 alias jlm='jira issue list -a$(jira me)'

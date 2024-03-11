@@ -16,7 +16,7 @@ alias mks='mac-keys | fzf'
 alias gb='git branch | fzf | xargs git checkout'
 alias git-current-branch="git branch | grep \* | cut -d ' ' -f2"
 alias gaa='git add .'
-alias gp='git pull'
+alias gp='git_pull_and_install pull'
 
 # Zsh
 alias up_alias='nvim $DOTFILES/zsh/.bash_aliases'
@@ -99,5 +99,15 @@ function la {
 		exa -lha --icons --sort=ext
 	else
 		ls -la --color=always
+	fi
+}
+
+function git_pull_and_install {
+	isNewPackage=$(git pull | grep "package.json")
+	if [[ $isNewPackage ]]; then
+		packageManager=$(gum confirm "Install new packages?" && gum choose "npm" "pnpm" "yarn")
+		if [[ $packageManager ]]; then
+			"$packageManager" install
+		fi
 	fi
 }

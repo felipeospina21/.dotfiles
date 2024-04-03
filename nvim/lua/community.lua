@@ -4,12 +4,11 @@
 
 ---@type LazySpec
 return {
-  -- TODO: Remove branch v4 on release
-  { "AstroNvim/astrocommunity", branch = "v4" },
+  { "AstroNvim/astrocommunity" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.typescript" },
-  -- { import = "astrocommunity.colorscheme.rose-pine" },
+  { import = "astrocommunity.colorscheme.rose-pine" },
   -- {
   --   "rose-pine",
   --   opts = {

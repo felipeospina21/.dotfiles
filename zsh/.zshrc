@@ -8,7 +8,7 @@ unsetopt autocd beep extendedglob notify
 bindkey -e
 zstyle :compinstall filename "$HOME/.zshrc"
 
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#908CAA'
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=59'
 
 export DOTFILES=$HOME/.dotfiles
 

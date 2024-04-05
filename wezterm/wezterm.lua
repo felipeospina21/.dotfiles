@@ -7,7 +7,7 @@ local tab_fg_inactive = "#808080"
 local cwd = "~/projects"
 
 local config = {
-	-- color_scheme = 'Ocean Dark (Gogh)',
+	-- color_scheme = "Ocean Dark (Gogh)",
 	color_scheme = "Solarized (dark) (terminal.sexy)",
 	inactive_pane_hsb = { saturation = 0.7, brightness = 0.6 },
 	window_padding = { left = 2, right = 0, top = 2, bottom = 0 },

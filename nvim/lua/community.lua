@@ -9,6 +9,8 @@ return {
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.colorscheme.rose-pine" },
+  { import = "astrocommunity.git.diffview-nvim" },
+  { import = "astrocommunity.lsp.ts-error-translator-nvim" },
   -- {
   --   "rose-pine",
   --   opts = {

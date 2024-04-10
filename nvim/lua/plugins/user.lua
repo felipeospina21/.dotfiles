@@ -36,12 +36,12 @@ return {
       "javascriptreact",
     },
   },
-  {
-    "maxmellon/vim-jsx-pretty",
-    name = "vim-jsx-pretty",
-    dependencies = { "HerringtonDarkholme/yats.vim", "yuezk/vim-js" },
-    event = { "BufEnter *.{tsx,ts}" },
-  },
+  -- {
+  --   "maxmellon/vim-jsx-pretty",
+  --   name = "vim-jsx-pretty",
+  --   dependencies = { "HerringtonDarkholme/yats.vim", "yuezk/vim-js" },
+  --   event = { "BufEnter *.{tsx,ts}" },
+  -- },
 
   -- {
   --   "ray-x/lsp_signature.nvim",

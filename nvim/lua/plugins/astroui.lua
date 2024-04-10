@@ -1,7 +1,13 @@
 -- AstroUI provides the basis for configuring the AstroNvim User Interface
 -- Configuration documentation can be found with `:h astroui`
--- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
---       as this provides autocomplete and documentation while editing
+
+local colors = {
+  dark = "#111317",
+  light = "#777777",
+  neutral = "#8094B4",
+  backdrop = "#61afef",
+  ignored = "#3f4145",
+}
 
 ---@type LazySpec
 return {
@@ -19,7 +25,14 @@ return {
         -- Normal = { bg = "#000000" },
       },
       astrodark = {
-        NeoTreeGitIgnored = { fg = "#3f4145", italic = true, bold = true },
+        NeoTreeGitIgnored = { fg = colors.ignored, italic = true, bold = true },
+
+        -- info messages
+        NeoTreeMessage = { link = "NeoTreeDotfile" },
+
+        -- dotfiles
+        NeoTreeDotfile = { fg = colors.light },
+        NeoTreeDotfiles = { link = "NeoTreeDotfile" },
       },
     },
     -- Icons can be configured throughout the interface

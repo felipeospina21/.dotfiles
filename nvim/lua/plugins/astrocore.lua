@@ -83,6 +83,9 @@ return {
         ["<Leader>j"] = { "<cmd>JsDoc<cr>", desc = "Add JsDoc comment" },
         ["<Leader>,"] = { "*:%s/<C-r><C-w>/", desc = "Substitute word under cursor" },
 
+        ["[q"] = { "<cmd>cprev<cr>", desc = "Previous error" },
+        ["]q"] = { "<cmd>cnext<cr>", desc = "Next error" },
+
         -- ["<Leader>N"] = { name = " Neotest" },
         -- ["<Leader>H"] = { name = " Http" },
         -- ["<Leader>P"] = { name = " Package.json" },

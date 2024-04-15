@@ -27,3 +27,11 @@ vim.api.nvim_create_autocmd("BufEnter", {
     vim.bo.shiftwidth = 4
   end,
 })
+
+vim.api.nvim_create_augroup("setNpmMakeprg", { clear = true })
+vim.api.nvim_create_autocmd("BufEnter", {
+  desc = "Set npm as makeprg",
+  group = "setNpmMakeprg",
+  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
+  callback = function() vim.opt.makeprg = "npm" end,
+})

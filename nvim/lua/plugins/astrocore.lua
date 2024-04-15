@@ -77,6 +77,7 @@ return {
 
         ["<Leader>fj"] = { "<cmd>Telescope jumplist<cr>", desc = "Find jumplist" },
         ["<Leader>fs"] = { "<cmd>Telescope spell_suggest<cr>", desc = "Spell suggestion" },
+        ["<Leader>fq"] = { "<cmd>Telescope quickfix<cr>", desc = "Quickfix list" },
         ["<Leader>f/"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Current buffer fzf" },
 
         ["<Leader>j"] = { "<cmd>JsDoc<cr>", desc = "Add JsDoc comment" },

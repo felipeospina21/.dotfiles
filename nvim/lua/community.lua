@@ -11,6 +11,16 @@ return {
   { import = "astrocommunity.colorscheme.rose-pine" },
   { import = "astrocommunity.git.diffview-nvim" },
   { import = "astrocommunity.lsp.ts-error-translator-nvim" },
+  {
+    "dmmulroy/tsc.nvim",
+    cmd = "TSC",
+    opts = {
+      flags = {
+        noEmit = true,
+        skipLibCheck = true,
+      },
+    },
+  },
   -- {
   --   "rose-pine",
   --   opts = {

@@ -41,10 +41,6 @@ return {
           hl.nav_fg = hl.nav_icon_bg
           hl.folder_icon_bg = get_hlgroup("Error").fg
 
-          hl.foam = "#9ccfd8"
-          hl.gold = "#f6c177"
-          hl.winbar_bg = "#3a3657"
-
           return hl
         end,
         attributes = {
@@ -65,7 +61,7 @@ return {
       opts.winbar = { -- winbar
         init = function(self) self.bufnr = vim.api.nvim_get_current_buf() end,
         fallthrough = false,
-        { -- inactive winbar
+        { -- active winbar
           condition = function() return status.condition.is_active() end,
           status.component.separated_path(),
           status.component.file_info {
@@ -84,60 +80,43 @@ return {
             -- surround = { separator = { "", "" } },
             update = { "BufEnter", "BufModifiedSet" },
           },
-          status.component.builder {
-            { provider = " [+]" },
-            padding = { right = 1 },
-            condition = function() return vim.bo.modified end,
-            hl = { fg = "green", bg = colors.winbar_bg },
-            -- surround = {
-            --   separator = { "", "" },
-            --   condition = function() return vim.bo.modified end,
-            --   color = { fg = colors.foam, bg = colors.winbar_bg },
-            -- },
-
-            --
-          },
-          status.component.builder {
-            { provider = " " },
-            padding = { right = 1 },
-            condition = function() return not vim.bo.modifiable or vim.bo.readonly end,
-            hl = { fg = "orange", bg = colors.winbar_bg },
+        },
+        { -- inactive winbar
+          condition = function() return not status.condition.is_active() end,
+          status.component.separated_path(),
+          status.component.file_info {
+            file_icon = { hl = "gray", padding = { left = 1, right = 1 } },
+            padding = { left = 1, right = 1 },
+            filename = {},
+            filetype = false,
+            file_read_only = false,
+            hl = function() return { fg = "gray", bg = "gray" } end,
+            update = { "BufEnter", "BufModifiedSet" },
           },
         },
-
-        -- status.component.file_info { -- add file_info to breadcrumbs
-        --   file_icon = { hl = status.hl.filetype_color, padding = { left = 0 } },
-        --   filename = {},
-        --   filetype = false,
-        --   -- file_modified = status.condition.file_modified(vim.api.nvim_get_current_buf()),
-        --   -- file_read_only = false,
-        --   hl = status.hl.get_attributes("winbar", true),
-        --   surround = { separator = "left", condition = false },
-        --   padding = { right = 1 },
-        --   update = "BufEnter",
-        -- },
         status.component.builder {
-          -- { provider = " [+]" },
-          { provider = status.provider.fill() },
-          filename = {},
-          filetype = false,
-          -- padding = { left = 1 },
-          -- condition = function() return vim.bo.modified end,
-          hl = status.hl.get_attributes "file_info",
-          surround = { separator = "left", condition = false },
-        },
-        -- {
-        --   condition = function() return not vim.bo.modifiable or vim.bo.readonly end,
-        --   provider = " ",
-        --   hl = { fg = "orange", bg = colors.winbar_bg },
-        -- },
+          -- Add icon on file with unsaved changes
+          { provider = " [+]" },
+          padding = { right = 1 },
+          condition = function() return vim.bo.modified end,
+          hl = { fg = "green", bg = colors.winbar_bg },
+          -- surround = {
+          --   separator = { "", "" },
+          --   condition = function() return vim.bo.modified end,
+          --   color = { fg = colors.foam, bg = colors.winbar_bg },
+          -- },
 
-        -- { -- active winbar
-        --   status.component.breadcrumbs {
-        --     hl = status.hl.get_attributes("winbar", true),
-        --   },
-        -- },
+          --
+        },
+        status.component.builder {
+          -- Add icon on file with readonly
+          { provider = " " },
+          padding = { right = 1 },
+          condition = function() return not vim.bo.modifiable or vim.bo.readonly end,
+          hl = { fg = "orange", bg = colors.winbar_bg },
+        },
       }
+
       opts.statusline = {
         -- default highlight for the entire statusline
         hl = { fg = "fg", bg = "bg" },

@@ -16,9 +16,10 @@ zcomet load ohmyzsh plugins/gitfast
 # zcomet load dgnest/zsh-gvm-plugin
 
 # It is good to load these popular plugins last, and in this order:
-zcomet load zsh-users/zsh-syntax-highlighting
 zcomet load jeffreytse/zsh-vi-mode
+zcomet load zsh-users/zsh-syntax-highlighting
 zcomet load zsh-users/zsh-autosuggestions
+zcomet load zsh-users/zsh-completions
 
 # Run compinit and compile its cache
 zcomet compinit

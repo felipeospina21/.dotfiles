@@ -77,8 +77,28 @@ return {
                 return { fg = colors.foam, bg = colors.winbar_bg }
               end
             end,
-            -- surround = { separator = { "", "" } },
             update = { "BufEnter", "BufModifiedSet" },
+          },
+          status.component.builder {
+            -- Add icon on file with unsaved changes
+            { provider = "[+]" },
+            padding = { left = 1 },
+            condition = function() return vim.bo.modified end,
+            hl = { fg = "green", bg = colors.winbar_bg },
+            surround = { separator = "none" },
+            -- surround = {
+            --   separator = { "", "" },
+            --   condition = function() return vim.bo.modified end,
+            --   color = { fg = colors.foam, bg = colors.winbar_bg },
+            -- },
+          },
+          status.component.builder {
+            -- Add icon on file with readonly
+            { provider = "" },
+            padding = { left = 1 },
+            condition = function() return not vim.bo.modifiable or vim.bo.readonly end,
+            hl = { fg = "orange", bg = colors.winbar_bg },
+            surround = { separator = "none" },
           },
         },
         { -- inactive winbar
@@ -93,27 +113,6 @@ return {
             hl = function() return { fg = "gray", bg = "gray" } end,
             update = { "BufEnter", "BufModifiedSet" },
           },
-        },
-        status.component.builder {
-          -- Add icon on file with unsaved changes
-          { provider = " [+]" },
-          padding = { right = 1 },
-          condition = function() return vim.bo.modified end,
-          hl = { fg = "green", bg = colors.winbar_bg },
-          -- surround = {
-          --   separator = { "", "" },
-          --   condition = function() return vim.bo.modified end,
-          --   color = { fg = colors.foam, bg = colors.winbar_bg },
-          -- },
-
-          --
-        },
-        status.component.builder {
-          -- Add icon on file with readonly
-          { provider = " " },
-          padding = { right = 1 },
-          condition = function() return not vim.bo.modifiable or vim.bo.readonly end,
-          hl = { fg = "orange", bg = colors.winbar_bg },
         },
       }
 

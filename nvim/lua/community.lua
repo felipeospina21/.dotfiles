@@ -9,9 +9,9 @@ return {
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.python" },
-  { import = "astrocommunity.colorscheme.rose-pine" },
   { import = "astrocommunity.git.diffview-nvim" },
-  { import = "astrocommunity.lsp.ts-error-translator-nvim" },
+  -- { import = "astrocommunity.colorscheme.rose-pine" },
+  -- { import = "astrocommunity.lsp.ts-error-translator-nvim" },
   {
     "dmmulroy/tsc.nvim",
     cmd = "TSC",

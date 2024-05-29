@@ -1,6 +1,8 @@
 -- AstroUI provides the basis for configuring the AstroNvim User Interface
 -- Configuration documentation can be found with `:h astroui`
 
+local C = require "astrotheme.palettes.astrodark"
+
 local colors = {
   dark = "#111317",
   light = "#777777",
@@ -25,6 +27,11 @@ return {
         -- Normal = { bg = "#000000" },
       },
       astrodark = {
+        SpellBad = { sp = C.ui.purple, undercurl = false, underdashed = true },
+        SpellCap = { sp = C.ui.yellow, undercurl = true, underdashed = true },
+        SpellLocal = { sp = C.ui.blue, undercurl = true, underdashed = true },
+        SpellRare = { sp = C.ui.green, undercurl = true, underdashed = true },
+
         NeoTreeGitIgnored = { fg = colors.ignored, italic = true, bold = true },
 
         -- info messages

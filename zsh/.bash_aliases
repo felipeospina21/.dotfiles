@@ -7,7 +7,6 @@ alias gg='lazygit'
 alias lg='lazygit'
 alias npk='npx npkill'
 alias zsh-alias='nvim $DOTFILES/zsh/.bash_aliases'
-alias dotfiles='nvim $DOTFILES'
 
 alias mac-keys='bat $DOTFILES/skhd/skhdrc'
 alias mks='mac-keys | fzf'
@@ -16,7 +15,7 @@ alias mks='mac-keys | fzf'
 alias gb='git branch | fzf | xargs git checkout'
 alias git-current-branch="git branch | grep \* | cut -d ' ' -f2"
 alias gaa='git add .'
-alias gp='git_pull_and_install pull'
+alias gp='git_pull_and_install'
 
 # Zsh
 alias up_alias='nvim $DOTFILES/zsh/.bash_aliases'
@@ -26,7 +25,7 @@ alias up_zsh_fold='nvim $DOTFILES/zsh'
 # Node (projects)
 alias tc='npm run type-check'
 alias gq='npm run gql:gen && npm run prettier:fix'
-alias ci='npm run ci-check'
+alias ci='$PWD/node_modules/.bin/npm-run-all prettier lint stylelint type-check'
 alias outdated='npx npm-check-updates -i --format group'
 
 # Jira
@@ -58,11 +57,12 @@ function gmr {
 	git checkout mr-"$1-$2"
 }
 
-# fun -> search & prints a custom function name
+# fun -> search & prints a custom func name
 function fun {
 	cat <"$HOME"/.dotfiles/zsh/.bash_aliases | grep -A"${2:-1}" "$1" | bat || less
 }
 
+# zsh_init_mes -> measures the time that zsh takes to start
 function zsh_init_mes {
 	# seq prints sequences of numbers. We use it with for .. in loop to run the commands 10 times
 	# time is a utility command to execute a command and then print out time used

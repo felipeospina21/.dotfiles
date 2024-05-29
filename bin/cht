@@ -1,4 +1,5 @@
 #!/bin/bash
+# Get cheatsheet for selected language from cht.sh
 
 output_file="/tmp/cht_res.txt"
 

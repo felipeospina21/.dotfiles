@@ -1,12 +1,14 @@
 #!/bin/bash
-# Look for projects and open it in new wezterm tab
+# Look for dotfiles folders & opent it with nvim
 
-base_path="$HOME/projects"
+base_path="$DOTFILES"
 
 selected_dir=$(fd --type d --max-depth 1 --base-directory "$base_path" . | fzf --prompt="Select a directory: " --preview="eza -lh --icons --sort=ext $base_path/{}")
 
 if [ -n "$selected_dir" ]; then
-	wezterm cli spawn --cwd "$base_path/$selected_dir"
+	path="$base_path/$selected_dir"
+	cd "$path" || exit
+	nvim "$path"
 
 else
 	echo "No directory selected. Exiting."

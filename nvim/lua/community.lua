@@ -10,6 +10,7 @@ return {
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.git.diffview-nvim" },
+  { import = "astrocommunity.recipes.telescope-lsp-mappings" },
   -- { import = "astrocommunity.colorscheme.rose-pine" },
   -- { import = "astrocommunity.lsp.ts-error-translator-nvim" },
   {

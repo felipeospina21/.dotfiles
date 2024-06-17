@@ -41,6 +41,7 @@ return {
     -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
     mappings = {
       -- first key is the mode
+      -- maps.n["grr"] = { function() vim.lsp.buf.references() end, desc = "vim.lsp.buf.references()" }
       n = {
         ["<Leader>b"] = { desc = "Buffers" },
         -- navigate buffer tabs with `H` and `L`
@@ -86,6 +87,8 @@ return {
         ["[q"] = { "<cmd>cprev<cr>", desc = "Previous error" },
         ["]q"] = { "<cmd>cnext<cr>", desc = "Next error" },
 
+        -- Override default mapping to use telescope
+        ["grr"] = { function() require("telescope.builtin").lsp_references() end, desc = "search reference" },
         -- ["<Leader>N"] = { name = " Neotest" },
         -- ["<Leader>H"] = { name = " Http" },
         -- ["<Leader>P"] = { name = " Package.json" },

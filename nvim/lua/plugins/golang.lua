@@ -110,7 +110,7 @@ return {
   },
   {
     "ray-x/go.nvim",
-    enabled = false,
+    enabled = true,
     dependencies = {
       "ray-x/guihua.lua",
       "neovim/nvim-lspconfig",

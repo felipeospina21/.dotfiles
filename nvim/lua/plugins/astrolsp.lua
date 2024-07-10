@@ -34,8 +34,10 @@ return {
         "eslint",
         "typescript-tools",
         "vtsls",
+        "cssls",
+        "stylelint",
       },
-      timeout_ms = 1000, -- default format timeout
+      timeout_ms = 10000, -- default format timeout
       -- filter = function(client) -- fully override the default formatting function
       --   return true
       -- end

@@ -7,7 +7,7 @@ return {
   { "AstroNvim/astrocommunity" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.bash" },
-  { import = "astrocommunity.pack.typescript" },
+  -- { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.git.diffview-nvim" },
   { import = "astrocommunity.recipes.telescope-lsp-mappings" },

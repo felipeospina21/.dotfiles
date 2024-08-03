@@ -24,6 +24,7 @@ alias up_zsh='nvim $DOTFILES/zsh/.zshrc'
 alias up_zsh_fold='nvim $DOTFILES/zsh'
 
 # Node (projects)
+alias nps='npm start'
 alias tc='npm run type-check'
 alias tt='npm run test'
 alias tw='npm run test:watch'

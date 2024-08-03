@@ -7,22 +7,24 @@ return {
   { "AstroNvim/astrocommunity" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.bash" },
-  -- { import = "astrocommunity.pack.typescript" },
+  { import = "astrocommunity.pack.toml" },
   { import = "astrocommunity.pack.python" },
+  { import = "astrocommunity.pack.go" },
   { import = "astrocommunity.git.diffview-nvim" },
   { import = "astrocommunity.recipes.telescope-lsp-mappings" },
   -- { import = "astrocommunity.colorscheme.rose-pine" },
   -- { import = "astrocommunity.lsp.ts-error-translator-nvim" },
-  {
-    "dmmulroy/tsc.nvim",
-    cmd = "TSC",
-    opts = {
-      flags = {
-        noEmit = true,
-        skipLibCheck = true,
-      },
-    },
-  },
+  -- {
+  -- Part of ts pack
+  --   "dmmulroy/tsc.nvim",
+  --   cmd = "TSC",
+  --   opts = {
+  --     flags = {
+  --       noEmit = true,
+  --       skipLibCheck = true,
+  --     },
+  --   },
+  -- },
   -- {
   --   "rose-pine",
   --   opts = {

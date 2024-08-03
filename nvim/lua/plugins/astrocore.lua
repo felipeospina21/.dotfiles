@@ -23,6 +23,7 @@ return {
     -- vim options can be configured here
     options = {
       opt = { -- vim.opt.<key>
+        grepprg = "rg --vimgrep --smart-case",
         relativenumber = true, -- sets vim.opt.relativenumber
         number = true, -- sets vim.opt.number
         spell = true, -- sets vim.opt.spell
@@ -43,7 +44,7 @@ return {
       -- first key is the mode
       -- maps.n["grr"] = { function() vim.lsp.buf.references() end, desc = "vim.lsp.buf.references()" }
       n = {
-        ["<Leader>b"] = { desc = "Buffers" },
+        -- ["<Leader>b"] = { desc = "Buffers" },
         -- navigate buffer tabs with `H` and `L`
         L = {
           function() require("astrocore.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
@@ -84,8 +85,8 @@ return {
         ["<Leader>j"] = { "<cmd>JsDoc<cr>", desc = "Add JsDoc comment" },
         ["<Leader>,"] = { "*:%s/<C-r><C-w>/", desc = "Substitute word under cursor" },
 
-        ["[q"] = { "<cmd>cprev<cr>", desc = "Previous error" },
-        ["]q"] = { "<cmd>cnext<cr>", desc = "Next error" },
+        ["[["] = { "<cmd>cprev<cr>", desc = "Previous error" },
+        ["]]"] = { "<cmd>cnext<cr>", desc = "Next error" },
 
         -- Override default mapping to use telescope
         ["grr"] = { function() require("telescope.builtin").lsp_references() end, desc = "search reference" },

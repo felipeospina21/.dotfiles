@@ -9,9 +9,11 @@ return {
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.toml" },
   { import = "astrocommunity.pack.python" },
-  { import = "astrocommunity.pack.go" },
+  -- { import = "astrocommunity.pack.go" },
   { import = "astrocommunity.git.diffview-nvim" },
   { import = "astrocommunity.recipes.telescope-lsp-mappings" },
+  { import = "astrocommunity.markdown-and-latex.markview-nvim" },
+
   -- { import = "astrocommunity.colorscheme.rose-pine" },
   -- { import = "astrocommunity.lsp.ts-error-translator-nvim" },
   -- {

@@ -7,17 +7,19 @@ local tab_fg_inactive = "#808080"
 local cwd = "~/projects"
 
 local config = {
-	-- color_scheme = "Ocean Dark (Gogh)",
-	color_scheme = "Solarized (dark) (terminal.sexy)",
+	color_scheme = "rose-pine",
+	-- color_scheme = "Solarized (dark) (terminal.sexy)",
 	inactive_pane_hsb = { saturation = 0.7, brightness = 0.6 },
 	window_padding = { left = 2, right = 0, top = 2, bottom = 0 },
 	warn_about_missing_glyphs = false,
 	enable_tab_bar = true,
 	tab_bar_at_bottom = true,
+	tab_max_width = 32,
 	use_fancy_tab_bar = false,
 	send_composed_key_when_left_alt_is_pressed = false,
 	send_composed_key_when_right_alt_is_pressed = false,
 	font_size = 10.5,
+	command_palette_font_size = 12,
 	leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
 	keys = {
 		-- Panes
@@ -127,7 +129,11 @@ local config = {
 	},
 }
 
-wezterm.on("format-tab-title", function(tab)
+function basename(s)
+	return string.gsub(s, "(.*[/\\])(.*)", "%2")
+end
+
+wezterm.on("format-tab-title", function(tab, _, _, _, _, max_width)
 	local background = "transparent"
 	local foreground = tab_fg_inactive
 
@@ -136,18 +142,40 @@ wezterm.on("format-tab-title", function(tab)
 		foreground = tab_fg_active
 	end
 
+	local title = (tab.tab_title and #tab.tab_title > 0) and tab.tab_title or tab.active_pane.title
+
+	-- NOTE: It looks for the [No Name] like string
+	local noName = title:match("^%[(.-)%]")
+	if noName == "No Name" then
+		-- NOTE: It looks what is after hyphens (-)
+		title = title:match("(%S+)$")
+	else
+		-- NOTE: this regex captures the first part before an empty space(process) & the part after (other)
+		local input, _ = title:match("^(%S+)%s*%-?%s*%s*(.*)$")
+		if input ~= nil then
+			title = input:match("^(.-)%s*:?%s*$")
+		end
+	end
+
+	local text = " " .. string.lower(title) .. " "
+	title = wezterm.truncate_right(text, max_width - 2)
+
+	-- TODO: check if these lines have a high perf cost
+	-- local pane = tab.active_pane
+	-- local title = basename(pane.foreground_process_name)
+	-- title = wezterm.truncate_right(title, max_width - 2)
 	return {
 		{ Attribute = { Intensity = "Bold" } },
 		{ Background = { Color = background } },
 		{ Foreground = { Color = foreground } },
-		{ Text = "  " .. tab.tab_index .. "  " },
+		{ Text = " [" .. tab.tab_index .. "]:" .. title .. " " },
 	}
 end)
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	-- Configs for Windows only
 	local wsl_domains = wezterm.default_wsl_domains()
-	for idx, dom in ipairs(wsl_domains) do
+	for _, dom in ipairs(wsl_domains) do
 		dom.default_prog = { "zsh" }
 	end
 	config.wsl_domains = wsl_domains

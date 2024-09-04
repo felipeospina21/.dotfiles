@@ -32,3 +32,11 @@ zvm_after_init_commands+=(eval "$(atuin init zsh)")
 
 mise_path=$(whereis mise | awk -F': ' '{print $2}' | awk '{print $1}')
 eval "$("$mise_path" activate zsh)"
+
+# pnpm
+export PNPM_HOME="/home/felipe/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

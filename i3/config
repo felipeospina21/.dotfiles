@@ -70,14 +70,15 @@ set $right l
 # use Mouse+Mod1 to drag floating windows to their wanted position
 floating_modifier Mod1
 
+# Mod1 -> alt
+# Mod4 -> cmd/window
 # start a terminal
 bindsym Mod1+Return exec wezterm
-bindsym Mod1+Shift+t exec wezterm
-bindsym Mod4+d exec "systemctl --user start docker-desktop"
-bindsym Mod4+b exec ~/./Beekeeper-Studio-4.0.3.AppImage
+bindsym Mod1+Shift+d exec "systemctl --user start docker-desktop"
+bindsym Mod1+Shift+b exec ~/./Beekeeper-Studio-4.0.3.AppImage
 
 # Turn off laptop screen
-bindsym Mod4+m exec toggle_monitor
+bindsym Mod1+Shift+m exec toggle_monitor
 bindsym Mod1+m exec set_monitor
 
 # kill focused window
@@ -180,12 +181,13 @@ bindsym Mod1+Shift+p move container to workspace prev
 assign [class="wezterm"] 1
 assign [class="firefox"] 2
 assign [title="Docker Desktop"] 3
-
-assign [class="beekeeper-studio"] 3
+assign [class="beekeeper-studio"] 4
 
 # borders
-default_border none
+default_border pixel 1
 default_floating_border none
+hide_edge_borders smart
+# gaps inner 5px
 
 # reload the configuration file
 bindsym Mod1+Shift+c reload
@@ -250,9 +252,9 @@ set $mantle    #181825
 set $crust     #11111b
 
 # target                 title     bg    text   indicator  border
-client.focused           $lavender $base $text  $rosewater $lavender
+client.focused           $lavender $base $text  $rosewater $sapphire
 client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
-client.unfocused         $overlay0 $base $text  $rosewater $overlay0
+client.unfocused         $overlay0 $base $text  $rosewater $base
 client.urgent            $peach    $base $peach $overlay0  $peach
 client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
 client.background        $base
@@ -280,5 +282,6 @@ bar {
         }
 }
 
-exec_always feh --bg-fill --randomize ~/Pictures/*
+# exec_always killall feh
+exec --no-startup-id feh --bg-fill --randomize ~/Pictures/*
 

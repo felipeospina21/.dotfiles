@@ -1,10 +1,30 @@
+-- rose pine colors
+-- base00: "#191724"
+-- base01: "#1f1d2e"
+-- base02: "#26233a"
+-- base03: "#6e6a86"
+-- base04: "#908caa"
+-- base05: "#e0def4"
+-- base06: "#e0def4"
+-- base07: "#524f67"
+-- base08: "#eb6f92"
+-- base09: "#f6c177"
+-- base0A: "#ebbcba"
+-- base0B: "#31748f"
+-- base0C: "#9ccfd8"
+-- base0D: "#c4a7e7"
+-- base0E: "#f6c177"
+-- base0F: "#524f67"
+
 local wezterm = require("wezterm")
 local mux = wezterm.mux
 local act = wezterm.action
-local tab_bg = "#00495c"
-local tab_fg_active = "#ea9a97"
+-- local solarized_bg = "#00495c"
+-- local solarized_fg_active = "#ea9a97"
+local rose_pine_bg = "#1f1d2e"
+local rose_pine_fg_active = "#9ccfd8"
 local tab_fg_inactive = "#808080"
-local cwd = "~/projects"
+local cwd = ""
 
 local config = {
 	color_scheme = "rose-pine",
@@ -21,6 +41,16 @@ local config = {
 	font_size = 10.5,
 	command_palette_font_size = 12,
 	leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
+	colors = {
+		tab_bar = {
+			background = "transparent",
+			new_tab = {
+				bg_color = "transparent",
+				fg_color = "#eb6f92",
+				intensity = "Bold",
+			},
+		},
+	},
 	keys = {
 		-- Panes
 		{
@@ -99,47 +129,28 @@ local config = {
 		{
 			key = "m",
 			mods = "LEADER",
+			action = wezterm.action_callback(function(window)
+				local home = os.getenv("HOME")
+				local mux_window = window:mux_window()
 
-			action = act.PromptInputLine({
-				description = wezterm.format({
-					{ Attribute = { Intensity = "Bold" } },
-					{ Foreground = { AnsiColor = "Fuchsia" } },
-					{ Text = "Enter project folder name" },
-				}),
-				action = wezterm.action_callback(function(window, pane, line)
-					local mux_window = window:mux_window()
-					local dir = cwd
-
-					-- check https://wezfurlong.org/wezterm/config/lua/ExecDomain.html
-
-					if line then
-						dir = "~/projects/" .. line
-					end
-
-					act.SpawnCommandInNewWindow({
-						label = "List all the files!",
-
-						args = { "ls", "-al" },
-					})
-					local _, new_pane, _ = mux_window:spawn_tab({ cwd = dir })
-					new_pane:split({ size = 0.5, cwd = dir })
-				end),
-			}),
+				-- check https://wezfurlong.org/wezterm/config/lua/ExecDomain.html
+				mux_window:spawn_tab({ cwd = home .. "/projects/" })
+			end),
 		},
 	},
 }
 
-function basename(s)
-	return string.gsub(s, "(.*[/\\])(.*)", "%2")
-end
+-- function basename(s)
+-- 	return string.gsub(s, "(.*[/\\])(.*)", "%2")
+-- end
 
 wezterm.on("format-tab-title", function(tab, _, _, _, _, max_width)
 	local background = "transparent"
 	local foreground = tab_fg_inactive
 
 	if tab.is_active then
-		background = tab_bg
-		foreground = tab_fg_active
+		background = rose_pine_bg
+		foreground = rose_pine_fg_active
 	end
 
 	local title = (tab.tab_title and #tab.tab_title > 0) and tab.tab_title or tab.active_pane.title
@@ -168,7 +179,7 @@ wezterm.on("format-tab-title", function(tab, _, _, _, _, max_width)
 		{ Attribute = { Intensity = "Bold" } },
 		{ Background = { Color = background } },
 		{ Foreground = { Color = foreground } },
-		{ Text = " [" .. tab.tab_index .. "]:" .. title .. " " },
+		{ Text = " [" .. tab.tab_index + 1 .. "]:" .. title .. " " },
 	}
 end)
 
@@ -194,6 +205,34 @@ if wezterm.target_triple == "x86_64-apple-darwin" then
 	-- Configs for OSX only
 	config.font_size = 14.5
 	config.command_palette_font_size = 18
+
+	wezterm.on("gui-startup", function(cmd)
+		local home = os.getenv("HOME")
+
+		-- allow `wezterm start -- something` to affect what we spawn
+		-- in our initial window
+		local args = {}
+		if cmd then
+			args = cmd.args
+		end
+
+		local mainTab, pane, window = mux.spawn_window({
+			workspace = "Disney",
+			cwd = home .. "/projects/radar/",
+			args = args,
+		})
+
+		local secondaryTab, _, _ = window:spawn_tab({
+			workspace = "Disney",
+			cwd = home .. "/projects/spellbook/",
+			args = args,
+		})
+
+		secondaryTab:set_title("spellbook")
+		mainTab:set_title("radar")
+		mainTab:activate()
+		-- pane:send_text("nvim .")
+	end)
 end
 
 return config

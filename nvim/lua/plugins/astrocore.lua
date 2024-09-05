@@ -31,6 +31,7 @@ return {
         wrap = true, -- sets vim.opt.wrap
         showtabline = 0,
         cmdheight = 1,
+        iskeyword = vim.opt.iskeyword:append "-", -- append '-' to iskeyword
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)

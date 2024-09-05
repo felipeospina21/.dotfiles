@@ -146,7 +146,7 @@ return {
       opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "prettierd" })
       if not opts.handlers then opts.handlers = {} end
 
-      -- this handler is custom (not in community package)
+      -- NOTE: this handler is custom (not in community package)
       opts.handlers.stylelint = function(source_name)
         local null_ls = require "null-ls"
         null_ls.register(null_ls.builtins.diagnostics[source_name].with {
@@ -223,7 +223,7 @@ return {
   {
     "dmmulroy/tsc.nvim",
     cmd = "TSC",
-    -- opts are custom (not in community package)
+    -- NOTE: opts are custom (not in community package)
     opts = {
       flags = {
         noEmit = true,

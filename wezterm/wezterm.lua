@@ -30,7 +30,7 @@ local config = {
 	color_scheme = "rose-pine",
 	-- color_scheme = "Solarized (dark) (terminal.sexy)",
 	inactive_pane_hsb = { saturation = 0.7, brightness = 0.6 },
-	window_padding = { left = 2, right = 0, top = 2, bottom = 0 },
+	window_padding = { left = 4, right = 0, top = 2, bottom = 0 },
 	warn_about_missing_glyphs = false,
 	enable_tab_bar = true,
 	tab_bar_at_bottom = true,
@@ -41,6 +41,17 @@ local config = {
 	font_size = 10.5,
 	command_palette_font_size = 12,
 	leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
+	skip_close_confirmation_for_processes_named = {
+		"bash",
+		"sh",
+		"zsh",
+		"fish",
+		"tmux",
+		"nu",
+		"cmd.exe",
+		"pwsh.exe",
+		"powershell.exe",
+	},
 	colors = {
 		tab_bar = {
 			background = "transparent",
@@ -71,7 +82,7 @@ local config = {
 		{
 			key = "x",
 			mods = "LEADER",
-			action = act.CloseCurrentPane({ confirm = false }),
+			action = act.CloseCurrentPane({ confirm = true }),
 		},
 		{
 			key = "h",
@@ -125,7 +136,6 @@ local config = {
 			mods = "LEADER",
 			action = act.ActivateTabRelative(-1),
 		},
-
 		{
 			key = "m",
 			mods = "LEADER",
@@ -135,6 +145,17 @@ local config = {
 
 				-- check https://wezfurlong.org/wezterm/config/lua/ExecDomain.html
 				mux_window:spawn_tab({ cwd = home .. "/projects/" })
+			end),
+		},
+		-- Spawns new tab & execut glabt cmd
+		{
+			key = "g",
+			mods = "LEADER",
+			action = wezterm.action_callback(function(window)
+				local home = os.getenv("HOME")
+				local mux_window = window:mux_window()
+				local _, pane = mux_window:spawn_tab({ cwd = home })
+				pane:send_text("glabt\n")
 			end),
 		},
 	},
@@ -216,22 +237,22 @@ if wezterm.target_triple == "x86_64-apple-darwin" then
 			args = cmd.args
 		end
 
-		local mainTab, pane, window = mux.spawn_window({
+		local mainTab, mainPane, window = mux.spawn_window({
 			workspace = "Disney",
 			cwd = home .. "/projects/radar/",
 			args = args,
 		})
 
-		local secondaryTab, _, _ = window:spawn_tab({
+		local spTab, spPane, _ = window:spawn_tab({
 			workspace = "Disney",
-			cwd = home .. "/projects/spellbook/",
 			args = args,
 		})
+		spPane:send_text("z spellbook\n")
+		spTab:set_title("spellbook")
 
-		secondaryTab:set_title("spellbook")
+		mainPane:send_text("nvim .\n")
 		mainTab:set_title("radar")
 		mainTab:activate()
-		-- pane:send_text("nvim .")
 	end)
 end
 

@@ -35,6 +35,9 @@ alias outdated='npx npm-check-updates -i --format group'
 # Jira
 alias jlm='jira issue list -a$(jira me)'
 
+# Brew
+alias brewup='brew outdated | gum choose --no-limit | xargs brew upgrade'
+
 # tok -> update project token
 function tok {
 	echo "ID_TOKEN=$1" >.env.local

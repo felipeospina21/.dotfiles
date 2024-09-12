@@ -6,12 +6,15 @@ git_color_text() {
 	gum style --foreground "$GIT_COLOR" "$1"
 }
 
+header="Choose $(git_color_text "branches") to operate on:"
+actionHeader="Choose a $(git_color_text "command"):"
+
 get_branches() {
 	# shellcheck disable=2046
 	if [ "${1+x}" ]; then
-		gum choose --selected.foreground="$GIT_COLOR" --limit="$1" $(git branch --format="%(refname:short)")
+		gum choose --header="$header" --header.foreground="#ffE9E9" --selected.foreground="$GIT_COLOR" --limit="$1" $(git branch --format="%(refname:short)")
 	else
-		gum choose --selected.foreground="$GIT_COLOR" --no-limit $(git branch --format="%(refname:short)")
+		gum choose --header="$header" --header.foreground="#ffE9E9" --selected.foreground="$GIT_COLOR" --no-limit $(git branch --format="%(refname:short)")
 	fi
 }
 
@@ -29,13 +32,9 @@ gum style \
 	--border-foreground "$GIT_COLOR" \
 	"$(git_color_text ' Git') Branch Manager"
 
-echo "Choose $(git_color_text 'branches') to operate on:"
 branches=$(get_branches)
 
-echo ""
-echo "Choose a $(git_color_text "command"):"
-command=$(gum choose --cursor.foreground="$GIT_COLOR" rebase delete update checkout)
-echo ""
+command=$(gum choose --header="$actionHeader" --header.foreground="#ffE9E9" --cursor.foreground="$GIT_COLOR" rebase delete update checkout)
 
 echo "$branches" | tr " " "\n" | while read -r branch; do
 	case $command in

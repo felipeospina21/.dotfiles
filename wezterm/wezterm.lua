@@ -27,6 +27,7 @@ local tab_fg_inactive = "#808080"
 local cwd = ""
 
 local config = {
+	-- color_scheme = "astrodark",
 	color_scheme = "rose-pine",
 	-- color_scheme = "Solarized (dark) (terminal.sexy)",
 	inactive_pane_hsb = { saturation = 0.7, brightness = 0.6 },

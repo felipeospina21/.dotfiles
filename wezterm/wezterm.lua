@@ -159,6 +159,33 @@ local config = {
 				pane:send_text("glabt\n")
 			end),
 		},
+		-- Spawns new tab & navigates to .Dotfiles through zoxide
+		{
+			key = "d",
+			mods = "LEADER",
+			action = wezterm.action_callback(function(window)
+				local home = os.getenv("HOME")
+				local mux_window = window:mux_window()
+				local _, pane = mux_window:spawn_tab({ cwd = home })
+				pane:send_text("z dot && nvim .\n")
+			end),
+		},
+		-- Rename current tab
+		{
+			key = "r",
+			mods = "LEADER",
+			action = act.PromptInputLine({
+				description = "Enter new name for tab",
+				action = wezterm.action_callback(function(window, pane, line)
+					-- line will be `nil` if they hit escape without entering anything
+					-- An empty string if they just hit enter
+					-- Or the actual line of text they wrote
+					if line then
+						window:active_tab():set_title(line)
+					end
+				end),
+			}),
+		},
 	},
 }
 

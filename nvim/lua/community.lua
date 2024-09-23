@@ -18,6 +18,7 @@ return {
     "OXY2DEV/markview.nvim",
     opts = {
       filetypes = { "markdown", "quarto", "rmd", "markdown.mdx" },
+      hybrid_modes = { "i" },
     },
   },
 

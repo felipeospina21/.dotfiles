@@ -30,6 +30,7 @@ return {
                 tidy = true,
                 upgrade_dependency = true,
                 vendor = true,
+                run_govulncheck = true,
               },
               hints = {
                 assignVariableTypes = true,

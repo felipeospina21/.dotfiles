@@ -1,3 +1,6 @@
+# Launch Wezterm
+default < alt - return : open -na /Applications/Wezterm.app
+
 # -- Moving Windows Around --
 
 # swap windows

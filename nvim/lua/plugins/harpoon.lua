@@ -14,7 +14,7 @@ return {
           local prefix = "<Leader><Leader>"
           maps.n[prefix] = { desc = require("astroui").get_icon("Harpoon", 1, true) .. "Harpoon" }
 
-          maps.n[prefix .. "a"] = { function() require("harpoon"):list():append() end, desc = "Add file" }
+          maps.n[prefix .. "a"] = { function() require("harpoon"):list():add() end, desc = "Add file" }
           maps.n[prefix .. "r"] = { function() require("harpoon"):list():remove() end, desc = "Remove file" }
           maps.n[prefix .. "c"] = { function() require("harpoon"):list():clear() end, desc = "Clear list" }
           maps.n[prefix .. "e"] = {

@@ -27,9 +27,10 @@ local tab_fg_inactive = "#808080"
 local cwd = ""
 
 local config = {
-	-- color_scheme = "astrodark",
-	color_scheme = "rose-pine",
+	color_scheme = "astrodark",
+	-- color_scheme = "rose-pine",
 	-- color_scheme = "Solarized (dark) (terminal.sexy)",
+	window_background_opacity = 0.85,
 	inactive_pane_hsb = { saturation = 0.7, brightness = 0.6 },
 	window_padding = { left = 4, right = 0, top = 2, bottom = 0 },
 	warn_about_missing_glyphs = false,
@@ -186,6 +187,22 @@ local config = {
 				end),
 			}),
 		},
+		{
+			key = "w",
+			mods = "LEADER",
+			action = wezterm.action_callback(function(window, pane)
+				local home = os.getenv("HOME")
+				local tab = window:active_tab()
+				local mux_window = window:mux_window()
+				local spTab, spPane, _ = mux_window:spawn_tab({ cwd = home })
+				spPane:send_text("z spellbook\n")
+				spTab:set_title("spellbook")
+
+				pane:send_text("z rad\n")
+				pane:send_text("nvim .\n")
+				tab:activate()
+			end),
+		},
 	},
 }
 
@@ -255,33 +272,33 @@ if wezterm.target_triple == "x86_64-apple-darwin" then
 	config.font_size = 14.5
 	config.command_palette_font_size = 18
 
-	wezterm.on("gui-startup", function(cmd)
-		local home = os.getenv("HOME")
-
-		-- allow `wezterm start -- something` to affect what we spawn
-		-- in our initial window
-		local args = {}
-		if cmd then
-			args = cmd.args
-		end
-
-		local mainTab, mainPane, window = mux.spawn_window({
-			workspace = "Disney",
-			cwd = home .. "/projects/radar/",
-			args = args,
-		})
-
-		local spTab, spPane, _ = window:spawn_tab({
-			workspace = "Disney",
-			args = args,
-		})
-		spPane:send_text("z spellbook\n")
-		spTab:set_title("spellbook")
-
-		mainPane:send_text("nvim .\n")
-		mainTab:set_title("radar")
-		mainTab:activate()
-	end)
+	-- wezterm.on("gui-startup", function(cmd)
+	-- 	local home = os.getenv("HOME")
+	--
+	-- 	-- allow `wezterm start -- something` to affect what we spawn
+	-- 	-- in our initial window
+	-- 	local args = {}
+	-- 	if cmd then
+	-- 		args = cmd.args
+	-- 	end
+	--
+	-- 	local mainTab, mainPane, window = mux.spawn_window({
+	-- 		workspace = "Disney",
+	-- 		cwd = home .. "/projects/radar/",
+	-- 		args = args,
+	-- 	})
+	--
+	-- 	local spTab, spPane, _ = window:spawn_tab({
+	-- 		workspace = "Disney",
+	-- 		args = args,
+	-- 	})
+	-- 	spPane:send_text("z spellbook\n")
+	-- 	spTab:set_title("spellbook")
+	--
+	-- 	mainPane:send_text("nvim .\n")
+	-- 	mainTab:set_title("radar")
+	-- 	mainTab:activate()
+	-- end)
 end
 
 return config

@@ -49,7 +49,11 @@ return {
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
-      -- overrides go community plugin config
+      taplo = {
+        filetypes = { "toml" },
+        -- IMPORTANT: this is required for taplo LSP to work in non-git repositories
+        root_dir = require("lspconfig.util").root_pattern("*.toml", ".git"),
+      },
     },
     -- customize how language servers are attached
     handlers = {

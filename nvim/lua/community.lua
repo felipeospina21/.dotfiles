@@ -11,6 +11,7 @@ return {
   { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.pack.mdx" },
   -- { import = "astrocommunity.pack.go" },
+  { import = "astrocommunity.test.nvim-coverage" },
   { import = "astrocommunity.git.diffview-nvim" },
   { import = "astrocommunity.recipes.telescope-lsp-mappings" },
   { import = "astrocommunity.markdown-and-latex.markview-nvim" },
@@ -21,7 +22,6 @@ return {
       hybrid_modes = { "i" },
     },
   },
-
   -- { import = "astrocommunity.colorscheme.rose-pine" },
   -- { import = "astrocommunity.lsp.ts-error-translator-nvim" },
   -- {

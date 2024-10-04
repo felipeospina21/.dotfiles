@@ -30,6 +30,8 @@ local config = {
 	color_scheme = "astrodark",
 	-- color_scheme = "rose-pine",
 	-- color_scheme = "Solarized (dark) (terminal.sexy)",
+	-- TODO: Remove after wezterm is updated with latest Nerd Icon Font
+	font = wezterm.font_with_fallback({ "JetBrains Mono", "Symbols Nerd Font" }),
 	window_background_opacity = 0.85,
 	inactive_pane_hsb = { saturation = 0.7, brightness = 0.6 },
 	window_padding = { left = 4, right = 0, top = 2, bottom = 0 },

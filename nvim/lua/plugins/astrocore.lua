@@ -91,9 +91,6 @@ return {
 
         -- Override default mapping to use telescope
         ["grr"] = { function() require("telescope.builtin").lsp_references() end, desc = "search reference" },
-        -- ["<Leader>N"] = { name = " Neotest" },
-        -- ["<Leader>H"] = { name = " Http" },
-        -- ["<Leader>P"] = { name = " Package.json" },
       },
       t = {
         -- setting a mapping to false will disable it

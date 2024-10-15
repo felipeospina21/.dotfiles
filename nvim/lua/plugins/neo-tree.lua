@@ -5,18 +5,18 @@ return {
       window = {
         width = 50,
       },
-      event_handlers = {
-
-        {
-          event = "file_open_requested",
-          handler = function()
-            -- auto close
-            -- vim.cmd("Neotree close")
-            -- OR
-            require("neo-tree.command").execute { action = "close" }
-          end,
-        },
-      },
+      -- event_handlers = {
+      --
+      --   {
+      --     event = "file_open_requested",
+      --     handler = function()
+      --       -- auto close
+      --       -- vim.cmd("Neotree close")
+      --       -- OR
+      --       require("neo-tree.command").execute { action = "close" }
+      --     end,
+      --   },
+      -- },
       filesystem = {
         components = {
           harpoon_index = function(config, node, _)

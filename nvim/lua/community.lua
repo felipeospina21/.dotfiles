@@ -11,6 +11,7 @@ return {
   { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.pack.mdx" },
   -- { import = "astrocommunity.pack.go" },
+  -- { import = "astrocommunity.icon.mini-icons" },
   { import = "astrocommunity.motion.nvim-surround" },
   { import = "astrocommunity.test.nvim-coverage" },
   { import = "astrocommunity.git.diffview-nvim" },

@@ -9,6 +9,7 @@ local colors = {
   neutral = "#8094B4",
   backdrop = "#61afef",
   ignored = "#3f4145",
+  red = "#eb6f92",
 }
 
 ---@type LazySpec
@@ -40,6 +41,7 @@ return {
         -- dotfiles
         NeoTreeDotfile = { fg = colors.light },
         NeoTreeDotfiles = { link = "NeoTreeDotfile" },
+        NeoTreeExpander = { fg = colors.light },
       },
     },
     -- Icons can be configured throughout the interface

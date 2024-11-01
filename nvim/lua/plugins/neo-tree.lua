@@ -1,23 +1,24 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
+  dependencies = {
+    "saifulapm/neotree-file-nesting-config",
+  },
   opts = function(_, opts)
     return require("astrocore").extend_tbl(opts, {
       window = {
         width = 50,
       },
-      -- event_handlers = {
-      --
-      --   {
-      --     event = "file_open_requested",
-      --     handler = function()
-      --       -- auto close
-      --       -- vim.cmd("Neotree close")
-      --       -- OR
-      --       require("neo-tree.command").execute { action = "close" }
-      --     end,
-      --   },
-      -- },
+      hide_root_node = true,
+      retain_hidden_root_indent = true,
       filesystem = {
+        filtered_items = {
+          hide_dotfiles = false,
+          hide_gitignored = false,
+          show_hidden_count = false,
+          never_show = {
+            ".DS_Store",
+          },
+        },
         components = {
           harpoon_index = function(config, node, _)
             local harpoon_list = require("harpoon"):list()
@@ -49,6 +50,35 @@ return {
           },
         },
       },
+      default_component_configs = {
+        indent = {
+          with_expanders = true,
+          expander_collapsed = "",
+          expander_expanded = "",
+        },
+        icon = {
+          folder_closed = "",
+          folder_open = "",
+        },
+      },
+
+      -- event_handlers = {
+      --
+      --   {
+      --     event = "file_open_requested",
+      --     handler = function()
+      --       -- auto close
+      --       -- vim.cmd("Neotree close")
+      --       -- OR
+      --       require("neo-tree.command").execute { action = "close" }
+      --     end,
+      --   },
+      -- },
     })
+  end,
+  config = function(_, opts)
+    -- Adding rules from plugin
+    opts.nesting_rules = require("neotree-file-nesting-config").nesting_rules
+    require("neo-tree").setup(opts)
   end,
 }

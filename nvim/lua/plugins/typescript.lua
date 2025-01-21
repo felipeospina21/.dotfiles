@@ -195,6 +195,7 @@ return {
     dependencies = { "MunifTanjim/nui.nvim" },
     opts = {},
     event = "BufRead package.json",
+    enabled = false,
   },
   {
     "yioneko/nvim-vtsls",

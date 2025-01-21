@@ -9,6 +9,7 @@ return {
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.toml" },
   { import = "astrocommunity.pack.python" },
+  { import = "astrocommunity.pack.tailwindcss" },
   { import = "astrocommunity.pack.mdx" },
   -- { import = "astrocommunity.pack.go" },
   -- { import = "astrocommunity.icon.mini-icons" },

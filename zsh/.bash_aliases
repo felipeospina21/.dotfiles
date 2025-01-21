@@ -24,7 +24,7 @@ alias up_zsh='nvim $DOTFILES/zsh/.zshrc'
 alias up_zsh_fold='nvim $DOTFILES/zsh'
 
 # Node (projects)
-alias nps='npm start'
+alias nps='npm start || pnpm run dev'
 alias tc='npm run type-check'
 alias tt='npm run test'
 alias tw='npm run test:watch'
@@ -133,4 +133,25 @@ function yy() {
 		builtin cd -- "$cwd"
 	fi
 	rm -f -- "$tmp"
+}
+
+# notes -> open notes folder
+# notes new -> creates new note and open it
+function notes() {
+	p="$HOME/notes/"
+
+	cd "$p" || exit
+
+	if [ -n "$1" ] && [ "$1" = "new" ]; then
+		d="$(date +"%d_%m_%y")"
+		n="$(ls -l | wc -l | xargs)"
+		count=$((n + 1))
+		filename="note${count}_${d}.md"
+		echo "$filename"
+		touch "$filename"
+		nvim "$filename"
+	else
+		nvim .
+	fi
+
 }

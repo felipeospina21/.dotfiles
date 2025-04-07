@@ -147,11 +147,26 @@ function notes() {
 		n="$(ls -l | wc -l | xargs)"
 		count=$((n + 1))
 		filename="note${count}_${d}.md"
-		echo "$filename"
 		touch "$filename"
 		nvim "$filename"
 	else
 		nvim .
+	fi
+
+}
+
+# mentoria -> open notes folder
+alias ment='mentoria'
+function mentoria() {
+	base_path="$HOME/mentorias"
+	selected_dir=$(fd --type d --max-depth 1 --base-directory "$base_path" . | fzf --prompt="Select a directory: " --preview="eza -lh --icons --sort=ext $base_path/{}")
+
+	if [ -n "$selected_dir" ]; then
+		cd "$base_path"/"$selected_dir" || exit
+		nvim "$base_path"/"$selected_dir"
+
+	else
+		echo "No directory selected. Exiting."
 	fi
 
 }

@@ -76,6 +76,7 @@ floating_modifier Mod1
 bindsym Mod1+Return exec wezterm
 bindsym Mod1+Shift+d exec "systemctl --user start docker-desktop"
 bindsym Mod1+Shift+b exec ~/./Beekeeper-Studio-4.0.3.AppImage
+bindsym Mod4+space exec ulauncher-toggle
 
 # Turn off laptop screen
 bindsym Mod1+Shift+m exec toggle_monitor

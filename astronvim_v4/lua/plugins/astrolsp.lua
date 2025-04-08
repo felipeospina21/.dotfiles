@@ -1,15 +1,15 @@
 -- AstroLSP allows you to customize the features in AstroNvim's LSP configuration engine
 -- Configuration documentation can be found with `:h astrolsp`
--- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
---       as this provides autocomplete and documentation while editing
 
 ---@type LazySpec
 return {
   "AstroNvim/astrolsp",
   ---@type AstroLSPOpts
+  -- optional = true,
   opts = {
     -- Configuration table of features provided by AstroLSP
     features = {
+      autoformat = true, -- enable or disable auto formatting on start
       codelens = true, -- enable/disable codelens refresh on start
       inlay_hints = false, -- enable/disable inlay hints on start
       semantic_tokens = true, -- enable/disable semantic token highlighting
@@ -23,6 +23,7 @@ return {
           -- "go",
         },
         ignore_filetypes = { -- disable format on save for specified filetypes
+          -- "typescriptreact",
           -- "python",
         },
       },
@@ -48,7 +49,6 @@ return {
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
-      -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
       taplo = {
         filetypes = { "toml" },
         -- IMPORTANT: this is required for taplo LSP to work in non-git repositories
@@ -71,42 +71,44 @@ return {
     autocmds = {
       eslint_fix_on_save = false,
       -- first key is the `augroup` to add the auto commands to (:h augroup)
-      lsp_codelens_refresh = {
+      -- eslint_fix_on_save = false,
+      lsp_document_highlight = {
         -- Optional condition to create/delete auto command group
         -- can either be a string of a client capability or a function of `fun(client, bufnr): boolean`
         -- condition will be resolved for each client on each execution and if it ever fails for all clients,
         -- the auto commands will be deleted for that buffer
-        cond = "textDocument/codeLens",
+        cond = "textDocument/documentHighlight",
         -- cond = function(client, bufnr) return client.name == "lua_ls" end,
         -- list of auto commands to set
         {
           -- events to trigger
-          event = { "InsertLeave", "BufEnter" },
+          event = { "CursorHold", "CursorHoldI" },
           -- the rest of the autocmd options (:h nvim_create_autocmd)
-          desc = "Refresh codelens (buffer)",
-          callback = function(args)
-            if require("astrolsp").config.features.codelens then vim.lsp.codelens.refresh { bufnr = args.buf } end
-          end,
+          desc = "Document Highlighting",
+          callback = function() vim.lsp.buf.document_highlight() end,
+        },
+        {
+          event = { "CursorMoved", "CursorMovedI", "BufLeave" },
+          desc = "Document Highlighting Clear",
+          callback = function() vim.lsp.buf.clear_references() end,
         },
       },
     },
     -- mappings to be set up on attaching of a language server
     mappings = {
       n = {
+        gl = { function() vim.diagnostic.open_float() end, desc = "Hover diagnostics" },
         -- a `cond` key can provided as the string of a server capability to be required to attach, or a function with `client` and `bufnr` parameters from the `on_attach` that returns a boolean
         -- gD = {
         --   function() vim.lsp.buf.declaration() end,
         --   desc = "Declaration of current symbol",
         --   cond = "textDocument/declaration",
         -- },
-        gl = { function() vim.diagnostic.open_float() end, desc = "Hover diagnostics" },
-        ["<Leader>uY"] = {
-          function() require("astrolsp.toggles").buffer_semantic_tokens() end,
-          desc = "Toggle LSP semantic highlight (buffer)",
-          cond = function(client)
-            return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens ~= nil
-          end,
-        },
+        -- ["<Leader>uY"] = {
+        --   function() require("astrolsp.toggles").buffer_semantic_tokens() end,
+        --   desc = "Toggle LSP semantic highlight (buffer)",
+        --   cond = function(client) return client.server_capabilities.semanticTokensProvider and vim.lsp.semantic_tokens end,
+        -- },
       },
     },
     -- A custom `on_attach` function to be run after the default `on_attach` function

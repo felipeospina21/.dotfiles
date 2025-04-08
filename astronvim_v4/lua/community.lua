@@ -4,7 +4,7 @@
 
 ---@type LazySpec
 return {
-  "AstroNvim/astrocommunity",
+  { "AstroNvim/astrocommunity" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.toml" },
@@ -19,4 +19,30 @@ return {
   { import = "astrocommunity.editing-support.vim-move" },
   { import = "astrocommunity.recipes.telescope-lsp-mappings" },
   { import = "astrocommunity.markdown-and-latex.markview-nvim" },
+  { import = "astrocommunity.neovim-lua-development.lazydev-nvim" },
+  -- { import = "astrocommunity.colorscheme.rose-pine" },
+  -- { import = "astrocommunity.lsp.ts-error-translator-nvim" },
+  -- {
+  -- Part of ts pack
+  --   "dmmulroy/tsc.nvim",
+  --   cmd = "TSC",
+  --   opts = {
+  --     flags = {
+  --       noEmit = true,
+  --       skipLibCheck = true,
+  --     },
+  --   },
+  -- },
+  -- {
+  --   "rose-pine",
+  --   opts = {
+  --     variant = "moon",
+  --     highlight_groups = {
+  --       IndentBlanklineChar = { fg = "surface", nocombine = true },
+  --       -- NotifyBackground = { bg = "surface" },
+  --       -- IndentBlanklineSpaceChar = { fg = "surface", nocombine = true },
+  --       -- IndentBlanklineSpaceCharBlankline = { fg = "surface", nocombine = true },
+  --     },
+  --   },
+  -- },
 }

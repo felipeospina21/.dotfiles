@@ -29,7 +29,7 @@ alias tc='npm run type-check'
 alias tt='npm run test'
 alias tw='npm run test:watch'
 alias gq='npm run gql:gen && npm run prettier:fix'
-alias ci='$PWD/node_modules/.bin/npm-run-all prettier lint stylelint type-check'
+alias ci='$PWD/node_modules/.bin/npm-run-all prettier lint:fix stylelint type-check'
 alias outdated='npx npm-check-updates -i --format group'
 
 # Jira

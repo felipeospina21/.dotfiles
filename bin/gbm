@@ -34,10 +34,13 @@ gum style \
 
 branches=$(get_branches)
 
-command=$(gum choose --header="$actionHeader" --header.foreground="#ffE9E9" --cursor.foreground="$GIT_COLOR" rebase delete update checkout)
+command=$(gum choose --header="$actionHeader" --header.foreground="#ffE9E9" --cursor.foreground="$GIT_COLOR" rebase pullrebase delete update checkout)
 
 echo "$branches" | tr " " "\n" | while read -r branch; do
 	case $command in
+	pullrebase)
+		git pull origin "$branch" --rebase
+		;;
 	rebase)
 		base_branch=$(get_branches 1)
 		git fetch origin

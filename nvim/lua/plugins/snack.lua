@@ -3,6 +3,8 @@ return {
     "folke/snacks.nvim",
     opts = {
       picker = {
+        preset = "ivy",
+        layout = { position = "top" },
         sources = {
           grep = {
             exclude = {

@@ -55,53 +55,37 @@ return {
         -- This can be found in the `lua/lazy_setup.lua` file
       },
     },
-    -- Mappings can be configured through AstroCore as well.
     -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
     mappings = {
-      -- first key is the mode
       n = {
-        -- second key is the lefthand side of the map
-
         -- navigate buffer tabs
         ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
 
-        -- mappings seen under group name "Buffer"
-        ["<Leader>bd"] = {
-          function()
-            require("astroui.status.heirline").buffer_picker(
-              function(bufnr) require("astrocore.buffer").close(bufnr) end
-            )
-          end,
-          desc = "Close buffer from tabline",
-        },
-
         ["<A-t>"] = { "<cmd>bnext<cr>", desc = "Next Buffer" },
         ["<AS-t>"] = { "<cmd>bprevious<cr>", desc = "Prev Buffer" },
-        ["<A-b>"] = { "<cmd>Telescope buffers<cr>", desc = "Buffers list" },
 
         ["<C-s>"] = { ":w!<cr>", desc = "Save File" },
 
-        ["<A-Up>"] = { "<cmd>m .-2<CR>", desc = "Move line up" },
-        ["<A-Down>"] = { "<cmd>m .+1<CR>", desc = "Move line down" },
-        ["<AS-Up>"] = { "VyP", desc = "Copy/Paste line up" },
-        ["<AS-Down>"] = { "Vyp", desc = "Copy/Paste line down" },
+        ["<C-Up>"] = { "VyP", desc = "Copy/Paste line up" },
+        ["<C-Down>"] = { "Vyp", desc = "Copy/Paste line down" },
 
         ["<Leader>r"] = { "<cmd>e<cr>", desc = "Refresh file" },
-
-        ["<Leader>fj"] = { "<cmd>Telescope jumplist<cr>", desc = "Find jumplist" },
-        ["<Leader>fs"] = { "<cmd>Telescope spell_suggest<cr>", desc = "Spell suggestion" },
-        ["<Leader>fq"] = { "<cmd>Telescope quickfix<cr>", desc = "Quickfix list" },
-        ["<Leader>f/"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Current buffer fzf" },
-
-        ["<Leader>j"] = { "<cmd>JsDoc<cr>", desc = "Add JsDoc comment" },
-        ["<Leader>,"] = { "*:%s/<C-r><C-w>/", desc = "Substitute word under cursor" },
 
         ["[["] = { "<cmd>cprev<cr>", desc = "Previous error" },
         ["]]"] = { "<cmd>cnext<cr>", desc = "Next error" },
 
-        -- Override default mapping to use telescope
-        ["grr"] = { function() require("telescope.builtin").lsp_references() end, desc = "search reference" },
+        -- Snacks pickers
+        ["<A-b>"] = {
+          function() require("snacks").picker.buffers { sort_lastused = true } end,
+          desc = "Buffers list",
+        },
+        ["<Leader>fj"] = { function() require("snacks").picker.jumps() end, desc = "Find jumplist" },
+        ["<Leader>fS"] = { function() require("snacks").picker.spelling() end, desc = "Spell suggestion" },
+        ["<Leader>fq"] = { function() require("snacks").picker.qflist() end, desc = "Quickfix list" },
+
+        ["<Leader>j"] = { "<cmd>JsDoc<cr>", desc = "Add JsDoc comment" },
+        ["<Leader>,"] = { "*:%s/<C-r><C-w>/", desc = "Substitute word under cursor" },
       },
     },
   },

@@ -17,6 +17,6 @@ return {
   { import = "astrocommunity.test.nvim-coverage" },
   { import = "astrocommunity.git.diffview-nvim" },
   { import = "astrocommunity.editing-support.vim-move" },
-  { import = "astrocommunity.recipes.telescope-lsp-mappings" },
+  { import = "astrocommunity.recipes.picker-lsp-mappings" },
   { import = "astrocommunity.markdown-and-latex.markview-nvim" },
 }

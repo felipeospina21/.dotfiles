@@ -30,10 +30,10 @@ return {
       },
     },
     keys = {
-      { "<leader>gy", "<cmd>GitLink<cr>", mode = { "n", "v" }, desc = "Yank git link" },
-      { "<leader>gx", "<cmd>GitLink!<cr>", mode = { "n", "v" }, desc = "Open git link in browser" },
-      { "<leader>go", "<cmd>GitLink! file<cr>", mode = { "n", "v" }, desc = "Open git file link in browser" },
-      { "<leader>gO", "<cmd>GitLink file<cr>", mode = { "n", "v" }, desc = "Yank git file link" },
+      { "<leader>gy", "<cmd>GitLink<cr>", mode = { "n", "v" }, desc = "Yank git link (line)" },
+      { "<leader>gY", "<cmd>GitLink file<cr>", mode = { "n", "v" }, desc = "Yank git link (file)" },
+      { "<leader>go", "<cmd>GitLink!<cr>", mode = { "n", "v" }, desc = "Open git link in browser (line)" },
+      { "<leader>gO", "<cmd>GitLink! file<cr>", mode = { "n", "v" }, desc = "Open git file link in browser (file)" },
     },
   },
 }

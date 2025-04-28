@@ -1,1 +1,3 @@
+--glob=!roxas-e2e/**
 --glob=!node_modules/**
+--glob=!**/title-schema.graphql

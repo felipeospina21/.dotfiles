@@ -28,7 +28,8 @@ alias nps='npm start || pnpm run dev'
 alias tc='npm run type-check'
 alias tt='npm run test'
 alias tw='npm run test:watch'
-alias gq='npm run gql:gen && npm run prettier:fix'
+alias tws='npm run test:watch -- --silent'
+alias gq="npm run gql:gen && ./node_modules/.bin/prettier --write 'src/shared/graphql/**/*.{js,ts,tsx,jsx,scss}'"
 alias ci='$PWD/node_modules/.bin/npm-run-all prettier lint:fix stylelint type-check'
 alias outdated='npx npm-check-updates -i --format group'
 
@@ -40,8 +41,11 @@ alias brewup='brew outdated | gum choose --no-limit | xargs brew upgrade'
 
 # tok -> update project token
 function tok {
-	echo "ID_TOKEN=$1" >.env.local
-	echo "token updated in $PWD/.env.local"
+	token=$(gum input --password --char-limit 9999 --placeholder "paste token...")
+	if [ -n "$token" ]; then
+		echo "ID_TOKEN=$token" >.env.local
+		echo "token updated in $PWD/.env.local"
+	fi
 }
 
 # take -> create a dir & cd to it

@@ -88,7 +88,7 @@ truncation_length = 2
 [character]
 success_symbol = "[❯](cyan)"
 error_symbol = "[❯](red)"
-vicmd_symbol = "[❮](green)"
+vimcmd_symbol = "[❮](red)"
 
 [memory_usage]
 disabled = true

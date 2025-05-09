@@ -30,12 +30,12 @@ return {
             end,
             desc = "Goto index of mark",
           }
-          maps.n["<A-p>"] = { function() require("harpoon"):list():prev() end, desc = "Goto previous mark" }
-          maps.n["<A-n>"] = { function() require("harpoon"):list():next() end, desc = "Goto next mark" }
-          maps.n["<C-n>"] = { function() require("harpoon"):list():select(1) end, desc = "Goto harpoon 1" }
-          maps.n["<C-e>"] = { function() require("harpoon"):list():select(2) end, desc = "Goto harpoon 2" }
-          maps.n["<C-i>"] = { function() require("harpoon"):list():select(3) end, desc = "Goto harpoon 3" }
-          maps.n["<C-o>"] = { function() require("harpoon"):list():select(4) end, desc = "Goto harpoon 4" }
+          maps.n["<C-p>"] = { function() require("harpoon"):list():prev() end, desc = "Goto previous mark" }
+          maps.n["<C-n>"] = { function() require("harpoon"):list():next() end, desc = "Goto next mark" }
+          maps.n["<A-n>"] = { function() require("harpoon"):list():select(1) end, desc = "Goto harpoon 1" }
+          maps.n["<A-e>"] = { function() require("harpoon"):list():select(2) end, desc = "Goto harpoon 2" }
+          maps.n["<A-i>"] = { function() require("harpoon"):list():select(3) end, desc = "Goto harpoon 3" }
+          maps.n["<A-o>"] = { function() require("harpoon"):list():select(4) end, desc = "Goto harpoon 4" }
           maps.n[prefix .. "m"] = { "<Cmd>Telescope harpoon marks<CR>", desc = "Show marks in Telescope" }
           maps.n[prefix .. "t"] = {
             function()

@@ -31,4 +31,18 @@ return {
       },
     },
   },
+  {
+    "windwp/nvim-autopairs",
+    opts = {
+      -- Conflictive keymap with harpoon
+      fast_wrap = false,
+    },
+  },
+  {
+    "RRethy/vim-illuminate",
+    opts = {
+      -- Conflictive keymap with harpoon
+      disable_keymaps = false,
+    },
+  },
 }

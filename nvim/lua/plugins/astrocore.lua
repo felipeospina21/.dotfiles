@@ -83,6 +83,7 @@ return {
         ["<Leader>fj"] = { function() require("snacks").picker.jumps() end, desc = "Find jumplist" },
         ["<Leader>fS"] = { function() require("snacks").picker.spelling() end, desc = "Spell suggestion" },
         ["<Leader>fq"] = { function() require("snacks").picker.qflist() end, desc = "Quickfix list" },
+        ["<Leader>fd"] = { function() require("snacks").picker.diagnostics() end, desc = "Diagnostics" },
 
         ["<Leader>j"] = { "<cmd>JsDoc<cr>", desc = "Add JsDoc comment" },
         ["<Leader>,"] = { "*:%s/<C-r><C-w>/", desc = "Substitute word under cursor" },

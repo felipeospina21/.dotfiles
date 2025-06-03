@@ -147,7 +147,7 @@ function notes() {
 	cd "$p" || exit
 
 	if [ -n "$1" ] && [ "$1" = "new" ]; then
-		d="$(date +"%d_%m_%y")"
+		d="$(date +"%y_%m_%d")"
 		n="$(ls -l | wc -l | xargs)"
 		count=$((n + 1))
 		filename="note${count}_${d}.md"

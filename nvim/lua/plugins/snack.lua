@@ -8,6 +8,7 @@ return {
         sources = {
           grep = {
             exclude = {
+              "/e2e-roxas/**",
               "/roxas-e2e/**",
               "/helm/**",
               "/danger/**",
@@ -19,6 +20,7 @@ return {
           },
           files = {
             exclude = {
+              "/e2e-roxas/**",
               "/roxas-e2e/**",
               "/helm/**",
               "/danger/**",

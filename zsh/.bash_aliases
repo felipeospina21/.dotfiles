@@ -8,6 +8,7 @@ alias lg='lazygit'
 alias glt='glabt'
 alias npk='npx npkill'
 alias zsh-alias='nvim $DOTFILES/zsh/.bash_aliases'
+alias swap_del='rm -rf ~/.local/state/nvim/swap/*'
 
 alias mac-keys='bat $DOTFILES/skhd/skhdrc'
 alias mks='mac-keys | fzf'

@@ -1,3 +1,4 @@
 .mise.toml
 todo.txt
 .env
+nvim/lazy-lock.json

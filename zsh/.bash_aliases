@@ -31,7 +31,7 @@ alias tt='npm run test'
 alias tw='npm run test:watch'
 alias tws='npm run test:watch -- --silent'
 alias gq="npm run gql:gen && ./node_modules/.bin/prettier --write 'src/shared/graphql/**/*.{js,ts,tsx,jsx,scss}'"
-alias ci='$PWD/node_modules/.bin/npm-run-all prettier lint:fix stylelint type-check'
+alias ci='$PWD/node_modules/.bin/npm-run-all prettier lint:fix stylelint:fix type-check'
 alias outdated='npx npm-check-updates -i --format group'
 
 # Jira

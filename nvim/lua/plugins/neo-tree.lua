@@ -7,6 +7,16 @@ return {
     return require("astrocore").extend_tbl(opts, {
       window = {
         width = 50,
+        mappings = {
+          ["<S-CR>"] = "system_open",
+          ["<space>"] = "noop",
+          ["[b"] = "prev_source",
+          ["]b"] = "next_source",
+          O = "system_open",
+          Y = "copy_selector",
+          h = "parent_or_close",
+          l = "child_or_open",
+        },
       },
       hide_root_node = true,
       retain_hidden_root_indent = true,

@@ -1,5 +1,7 @@
 #!/bin/bash
 alias ls=lsReplacement
+alias ll=ll
+alias la=la
 alias cls='clear'
 alias gg='lazygit'
 alias lg='lazygit'
@@ -8,6 +10,8 @@ alias npk='npx npkill'
 alias zsh-alias='nvim $DOTFILES/zsh/.bash_aliases'
 alias swap_del='rm -rf ~/.local/state/nvim/swap/*'
 alias kiro='kiro-cli'
+alias imgcat='wezterm imgcat'
+alias mmdc='npx -p @mermaid-js/mermaid-cli mmdc'
 
 alias mac-keys='bat $DOTFILES/skhd/skhdrc'
 alias mks='mac-keys | fzf'

@@ -1,5 +1,3 @@
-if true then return end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
 -- This will run last in the setup process.
 -- This is just pure lua so anything that doesn't
 -- fit in the normal config locations above can go here
@@ -18,10 +16,10 @@ if true then return end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 -- }
 
 vim.api.nvim_create_augroup("setGolangIndent", { clear = true })
-vim.api.nvim_create_autocmd("BufEnter", {
+vim.api.nvim_create_autocmd("FileType", {
   desc = "Golang files indent",
   group = "setGolangIndent",
-  pattern = "*.go",
+  pattern = "go",
   callback = function()
     vim.bo.expandtab = false
     vim.bo.tabstop = 4

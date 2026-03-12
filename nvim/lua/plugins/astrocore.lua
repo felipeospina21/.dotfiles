@@ -84,7 +84,18 @@ return {
         ["<Leader>fS"] = { function() require("snacks").picker.spelling() end, desc = "Spell suggestion" },
         ["<Leader>fq"] = { function() require("snacks").picker.qflist() end, desc = "Quickfix list" },
         ["<Leader>fd"] = { function() require("snacks").picker.diagnostics() end, desc = "Diagnostics" },
-        ["<Leader>fz"] = {
+        ["<Leader>fz"] = { desc = "Find in SP" },
+        ["<Leader>fzf"] = {
+          function()
+            require("snacks").picker.files {
+              dirs = { vim.fn.expand "~" .. "/projects/disney/spellbook/src/" },
+              prompt = "Find SP Files: ",
+              need_search = false,
+            }
+          end,
+          desc = "Find SP Files",
+        },
+        ["<Leader>fzt"] = {
           function()
             require("snacks").picker.grep {
               dirs = { vim.fn.expand "~" .. "/projects/disney/spellbook/styles/spellbook-tokens.scss" },

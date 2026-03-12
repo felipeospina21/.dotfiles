@@ -9,7 +9,7 @@ return {
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.toml" },
   { import = "astrocommunity.pack.python" },
-  { import = "astrocommunity.pack.tailwindcss" },
+  -- { import = "astrocommunity.pack.tailwindcss" },
   { import = "astrocommunity.pack.mdx" },
   -- { import = "astrocommunity.pack.go" },
   -- { import = "astrocommunity.icon.mini-icons" },
@@ -17,6 +17,8 @@ return {
   { import = "astrocommunity.test.nvim-coverage" },
   { import = "astrocommunity.git.diffview-nvim" },
   { import = "astrocommunity.editing-support.vim-move" },
+  -- { import = "astrocommunity.editing-support.copilotchat-nvim" },
+  -- { import = "astrocommunity.completion.copilot-lua-cmp" },
   { import = "astrocommunity.recipes.picker-lsp-mappings" },
   { import = "astrocommunity.markdown-and-latex.markview-nvim" },
 }

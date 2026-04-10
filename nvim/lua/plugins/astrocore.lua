@@ -108,6 +108,22 @@ return {
 
         ["<Leader>j"] = { "<cmd>JsDoc<cr>", desc = "Add JsDoc comment" },
         ["<Leader>,"] = { "*:%s/<C-r><C-w>/", desc = "Substitute word under cursor" },
+        ["<Leader>tm"] = {
+          function()
+            local Terminal = require("toggleterm.terminal").Terminal
+            local mrglab = Terminal:new {
+              cmd = "mrglab",
+              direction = "float",
+              hidden = true,
+              float_opts = { border = "rounded" },
+              on_open = function(term)
+                vim.keymap.set("t", "q", function() term:toggle() end, { buffer = term.bufnr })
+              end,
+            }
+            mrglab:toggle()
+          end,
+          desc = "Toggle mrglab",
+        },
       },
     },
   },

@@ -19,6 +19,7 @@ return {
             },
           },
           files = {
+            follow = true,
             exclude = {
               "/e2e-roxas/**",
               "/roxas-e2e/**",

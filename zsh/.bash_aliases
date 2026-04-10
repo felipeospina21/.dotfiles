@@ -1,14 +1,13 @@
 #!/bin/bash
 alias ls=lsReplacement
-alias ll=ll
-alias la=la
 alias cls='clear'
 alias gg='lazygit'
 alias lg='lazygit'
-alias glt='glabt'
+alias glt='mrglab'
 alias npk='npx npkill'
 alias zsh-alias='nvim $DOTFILES/zsh/.bash_aliases'
 alias swap_del='rm -rf ~/.local/state/nvim/swap/*'
+alias kiro='kiro-cli'
 
 alias mac-keys='bat $DOTFILES/skhd/skhdrc'
 alias mks='mac-keys | fzf'
@@ -102,21 +101,31 @@ function lsReplacement {
 
 function ll {
 	if command -v eza &>/dev/null; then
-		eza -lh --icons --sort=ext
+		eza -lh --icons --sort=ext "$@"
 	elif command -v exa &>/dev/null; then
-		exa -lh --icons --sort=ext
+		exa -lh --icons --sort=ext "$@"
 	else
-		ls -l --color=always
+		ls -l --color=always "$@"
 	fi
 }
 
 function la {
 	if command -v eza &>/dev/null; then
-		eza -lha --icons --sort=ext
+		eza -lha --icons --sort=ext "$@"
 	elif command -v exa &>/dev/null; then
-		exa -lha --icons --sort=ext
+		exa -lha --icons --sort=ext "$@"
 	else
-		ls -la --color=always
+		ls -la --color=always "$@"
+	fi
+}
+
+function lt {
+	if command -v eza &>/dev/null; then
+		eza --tree --icons --sort=ext "$@"
+	elif command -v exa &>/dev/null; then
+		exa --tree --icons --sort=ext "$@"
+	else
+		tree "$@"
 	fi
 }
 
@@ -173,5 +182,26 @@ function mentoria() {
 	else
 		echo "No directory selected. Exiting."
 	fi
+
+}
+
+#
+function dw() {
+	WORKSPACE="myworkspace"
+	TAB1_PATH="$HOME/projects/disney/maestro"
+	TAB2_PATH="$HOME/projects/disney/milestone_insight"
+
+	# Switch/create workspace
+	wezterm cli rename-workspace "$WORKSPACE"
+
+	# Make the current tab go to TAB1_PATH
+	wezterm cli spawn --cwd "$TAB1_PATH"
+	wezterm cli set-tab-title --pane-id 1 "Maestro"
+
+	# Create second tab and set its path
+	wezterm cli spawn --cwd "$TAB2_PATH"
+	wezterm cli set-tab-title --pane-id 2 "MI"
+
+	wezterm cli kill-pane --pane-id 0
 
 }

@@ -2,6 +2,7 @@ return {
   {
     "AstroNvim/astrolsp",
     optional = true,
+    enabled = vim.fn.executable "go" == 1,
     ---@type AstroLSPOpts
     opts = {
       ---@diagnostic disable-next-line: missing-fields

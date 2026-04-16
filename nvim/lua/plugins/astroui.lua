@@ -41,6 +41,12 @@ return {
         NeoTreeDotfile = { fg = colors.light },
         NeoTreeDotfiles = { link = "NeoTreeDotfile" },
         NeoTreeExpander = { fg = colors.light },
+
+        -- Snacks
+        SnacksPickerDir = { fg = "#5e5e6a" },
+
+        -- Line numbers (inactive)
+        LineNr = { fg = "#4a4e57" },
       },
     },
     -- Icons can be configured throughout the interface

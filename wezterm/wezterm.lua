@@ -33,7 +33,7 @@ local config = {
 	-- TODO: Remove after wezterm is updated with latest Nerd Icon Font
 	font = wezterm.font_with_fallback({ "JetBrains Mono", "Symbols Nerd Font" }),
 	window_background_opacity = 0.85,
-	inactive_pane_hsb = { saturation = 0.7, brightness = 0.6 },
+	inactive_pane_hsb = { saturation = 0.8, brightness = 0.3 },
 	window_padding = { left = 4, right = 0, top = 2, bottom = 0 },
 	warn_about_missing_glyphs = false,
 	enable_tab_bar = true,

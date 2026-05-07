@@ -192,17 +192,23 @@ local config = {
 		{
 			key = "w",
 			mods = "LEADER",
-			action = wezterm.action_callback(function(window, pane)
+			action = wezterm.action_callback(function(window)
 				local home = os.getenv("HOME")
-				local tab = window:active_tab()
 				local mux_window = window:mux_window()
-				local spTab, spPane, _ = mux_window:spawn_tab({ cwd = home })
-				spPane:send_text("z spellbook\n")
-				spTab:set_title("spellbook")
 
-				pane:send_text("z rad\n")
-				pane:send_text("nvim .\n")
-				tab:activate()
+				local maestroTab, _maestroPane, _ = mux_window:spawn_tab({ cwd = home .. "/projects/disney/maestro" })
+				maestroTab:set_title("maestro")
+
+				local miTab, miPane, _ = mux_window:spawn_tab({ cwd = home .. "/projects/disney/milestone_insight" })
+				miPane:send_text("nvim .\n")
+				miTab:set_title("mi")
+
+				local wktreeTab, wkTreePane, _ = mux_window:spawn_tab({ cwd = home .. "/projects/disney/.worktrees" })
+				wktreeTab:set_title("worktrees")
+				wkTreePane:split({ direction = "Right", size = 0.5, cwd = home .. "/projects/disney/milestone_insight" })
+				miPane:send_text("ssh-add\n")
+
+				miTab:activate()
 			end),
 		},
 	},
@@ -273,34 +279,6 @@ if wezterm.target_triple == "x86_64-apple-darwin" then
 	-- Configs for OSX only
 	config.font_size = 14.5
 	config.command_palette_font_size = 18
-
-	-- wezterm.on("gui-startup", function(cmd)
-	-- 	local home = os.getenv("HOME")
-	--
-	-- 	-- allow `wezterm start -- something` to affect what we spawn
-	-- 	-- in our initial window
-	-- 	local args = {}
-	-- 	if cmd then
-	-- 		args = cmd.args
-	-- 	end
-	--
-	-- 	local mainTab, mainPane, window = mux.spawn_window({
-	-- 		workspace = "Disney",
-	-- 		cwd = home .. "/projects/radar/",
-	-- 		args = args,
-	-- 	})
-	--
-	-- 	local spTab, spPane, _ = window:spawn_tab({
-	-- 		workspace = "Disney",
-	-- 		args = args,
-	-- 	})
-	-- 	spPane:send_text("z spellbook\n")
-	-- 	spTab:set_title("spellbook")
-	--
-	-- 	mainPane:send_text("nvim .\n")
-	-- 	mainTab:set_title("radar")
-	-- 	mainTab:activate()
-	-- end)
 end
 
 return config

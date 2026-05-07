@@ -6,4 +6,9 @@ export STARSHIP_CONFIG=$XDG_CONFIG_HOME/starship/starship.toml
 export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/.ripgreprc"
 
-export PATH="$HOME:"$HOME/.local/bin":$PATH"
+# Homebrew (macOS)
+if [ -x "/opt/homebrew/bin/brew" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+export PATH="$HOME/.local/bin:$PATH"

@@ -64,4 +64,23 @@ if command -v mise &>/dev/null; then
 	mise install
 fi
 
+# --- SSH key ---
+if [ ! -f "$HOME/.ssh/id_ed25519" ]; then
+	read -rp "Email for SSH key: " ssh_email
+	ssh-keygen -t ed25519 -C "$ssh_email" -f "$HOME/.ssh/id_ed25519" -N ""
+	eval "$(ssh-agent -s)"
+	ssh-add "$HOME/.ssh/id_ed25519"
+	echo ""
+	echo "⚠️  Add this SSH key to GitLab/GitHub:"
+	echo "   https://gitlab.com/-/user_settings/ssh_keys"
+	echo "   https://github.com/settings/ssh/new"
+	echo ""
+	cat "$HOME/.ssh/id_ed25519.pub"
+	echo ""
+fi
+
+# --- macOS preferences ---
+echo "Setting macOS defaults..."
+source "$DOTFILES/macos-defaults.sh"
+
 echo "Done! Restart your shell."

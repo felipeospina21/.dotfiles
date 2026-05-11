@@ -31,21 +31,23 @@ mkdir -p "$HOME/.local/bin" "$XDG_CONFIG_HOME"
 
 # --- Stow configs ---
 STOW_PACKAGES=(
+	# cross-platform
 	atuin
 	bottom
-	i3
-	i3blocks
 	lazydocker
 	lazygit
 	mise
 	nvim
-	picom
 	ripgrep
-	rofi
 	starship
 	wezterm
 	yazi
 	zsh
+	# linux-only
+	i3
+	i3blocks
+	picom
+	rofi
 )
 
 echo "Linking configs..."

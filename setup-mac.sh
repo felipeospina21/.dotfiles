@@ -21,6 +21,7 @@ mkdir -p "$HOME/.local/bin" "$XDG_CONFIG_HOME"
 # --- Stow configs ---
 # Packages whose folder name matches their XDG config dir name
 STOW_PACKAGES=(
+	# cross-platform
 	atuin
 	bottom
 	lazydocker
@@ -28,12 +29,13 @@ STOW_PACKAGES=(
 	mise
 	nvim
 	ripgrep
-	skhd
 	starship
 	wezterm
-	yabai
 	yazi
 	zsh
+	# macos-only
+	skhd
+	yabai
 )
 
 echo "Linking configs..."

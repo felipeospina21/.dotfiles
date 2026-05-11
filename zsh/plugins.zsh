@@ -18,8 +18,10 @@ zcomet load ohmyzsh plugins/gitfast
 # It is good to load these popular plugins last, and in this order:
 zcomet load jeffreytse/zsh-vi-mode
 zcomet load zsh-users/zsh-syntax-highlighting
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=59'
 zcomet load zsh-users/zsh-autosuggestions
 zcomet load zsh-users/zsh-completions
 
 # Run compinit and compile its cache
+zstyle ':zcomet:compinit' arguments -C
 zcomet compinit

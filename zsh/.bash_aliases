@@ -1,4 +1,3 @@
-#!/bin/bash
 alias ls=lsReplacement
 alias ll=ll
 alias la=la

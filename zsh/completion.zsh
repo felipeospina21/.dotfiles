@@ -1,5 +1,4 @@
 zmodload zsh/complist
-autoload -U compinit; compinit
 _comp_options+=(globdots) # With hidden files
 
 # setopt GLOB_COMPLETE      # Show autocompletion menu with globs

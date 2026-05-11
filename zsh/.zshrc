@@ -1,47 +1,36 @@
-# Lines configured by zsh-newuser-install
+# profiling
 # zmodload zsh/zprof
 
+# shellcheck disable=SC2034 # error for unusued variables fasle positive
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
+
+setopt HIST_IGNORE_DUPS  # don't store consecutive duplicates
+setopt HIST_IGNORE_SPACE # commands starting with space won't be saved
+setopt SHARE_HISTORY
+
+# autocd: don't cd by typing dir name | beep: no terminal bell | extendedglob: avoid conflicts with git refs | notify: no immediate bg job alerts
 unsetopt autocd beep extendedglob notify
-bindkey -e
 
 export DOTFILES=$HOME/.dotfiles
 
-zstyle :compinstall filename "$DOTFILES/zsh/.zshrc"
-
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=59'
-
-source_if_exists() {
-    if test -r "$1"; then
-        source "$1"
-    else
-        echo "Couldn't find $1"
-    fi
-}
+source "$DOTFILES/zsh/helpers.zsh"
 
 source_if_exists "$DOTFILES/zsh/.bash_aliases"
 source_if_exists "$DOTFILES/zsh/completion.zsh"
 source_if_exists "$DOTFILES/zsh/plugins.zsh"
-# replaced by mise
-# source_if_exists $DOTFILES/zsh/load_nvmrc.zsh
-# source_if_exists $DOTFILES/zsh/load_gvm.zsh
 
-eval "$(starship init zsh)"
-zvm_after_init_commands+=(eval "$(atuin init zsh)")
+eval_if_installed starship init zsh
+eval_if_installed mise activate zsh
 
-mise_path=$(whereis mise | awk -F': ' '{print $2}' | awk '{print $1}')
-eval "$("$mise_path" activate zsh)"
-
-# pnpm
-export PNPM_HOME="$HOME/.local/share/pnpm"
-case ":$PATH:" in
-*":$PNPM_HOME:"*) ;;
-*) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
+if command -v atuin &>/dev/null; then
+    zvm_after_init_commands+=(eval "$(atuin init zsh)")
+fi
 
 if [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
+
+# profiling
+# zprof

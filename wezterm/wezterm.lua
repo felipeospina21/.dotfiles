@@ -281,4 +281,10 @@ if wezterm.target_triple == "x86_64-apple-darwin" then
 	config.command_palette_font_size = 18
 end
 
+if wezterm.target_triple == "aarch64-apple-darwin" then
+	-- Configs for OSX only
+	config.font_size = 13.5
+	config.command_palette_font_size = 18
+end
+
 return config

@@ -53,6 +53,13 @@ return {
     },
   },
   {
+    "RRethy/vim-illuminate",
+    opts = {
+      -- Conflictive keymap with harpoon
+      disable_keymaps = false,
+    },
+  },
+  {
     "saghen/blink.cmp",
     dependencies = { "onsails/lspkind.nvim", "nvim-tree/nvim-web-devicons" },
     opts = {

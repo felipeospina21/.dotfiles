@@ -1,5 +1,7 @@
 -- AstroUI provides the basis for configuring the AstroNvim User Interface
 -- Configuration documentation can be found with `:h astroui`
+-- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
+--       as this provides autocomplete and documentation while editing
 
 local C = require "astrotheme.palettes.astrodark"
 
@@ -24,10 +26,7 @@ return {
       init = { -- this table overrides highlights in all themes
         -- Normal = { bg = "#000000" },
       },
-      astrotheme = { -- a table of overrides/changes when applying the astrotheme theme
-        -- Normal = { bg = "#000000" },
-      },
-      astrodark = {
+      astrodark = { -- a table of overrides/changes when applying the astrotheme theme
         SpellBad = { sp = C.ui.purple, undercurl = false, underdashed = true },
         SpellCap = { sp = C.ui.yellow, undercurl = true, underdashed = true },
         SpellLocal = { sp = C.ui.blue, undercurl = true, underdashed = true },
@@ -42,6 +41,12 @@ return {
         NeoTreeDotfile = { fg = colors.light },
         NeoTreeDotfiles = { link = "NeoTreeDotfile" },
         NeoTreeExpander = { fg = colors.light },
+
+        -- Snacks
+        SnacksPickerDir = { fg = "#5e5e6a" },
+
+        -- Line numbers (inactive)
+        LineNr = { fg = "#4a4e57" },
       },
     },
     -- Icons can be configured throughout the interface

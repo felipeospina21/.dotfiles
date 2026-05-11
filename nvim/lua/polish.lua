@@ -2,19 +2,6 @@
 -- This is just pure lua so anything that doesn't
 -- fit in the normal config locations above can go here
 
--- Set up custom filetypes
--- vim.filetype.add {
---   extension = {
---     foo = "fooscript",
---   },
---   filename = {
---     ["Foofile"] = "fooscript",
---   },
---   pattern = {
---     ["~/%.config/foo/.*"] = "fooscript",
---   },
--- }
-
 vim.api.nvim_create_augroup("setGolangIndent", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
   desc = "Golang files indent",

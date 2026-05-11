@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -uo pipefail
 
 DOTFILES="$(cd "$(dirname "$0")" && pwd)"
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
@@ -13,7 +13,7 @@ fi
 
 # --- Install packages from Brewfile ---
 echo "Installing packages..."
-brew bundle --file="$DOTFILES/Brewfile"
+brew bundle --file="$DOTFILES/Brewfile" || echo "⚠️  Some packages failed to install"
 
 # --- Create required directories ---
 mkdir -p "$HOME/.local/bin" "$XDG_CONFIG_HOME"
@@ -21,34 +21,36 @@ mkdir -p "$HOME/.local/bin" "$XDG_CONFIG_HOME"
 # --- Stow configs ---
 # Packages whose folder name matches their XDG config dir name
 STOW_PACKAGES=(
-	nvim
-	starship
-	lazygit
-	lazydocker
-	wezterm
-	yazi
 	atuin
 	bottom
-	ripgrep
-	tmux
-	yabai
-	skhd
-	sketchybar
+	lazydocker
+	lazygit
 	mise
+	nvim
+	ripgrep
+	skhd
+	starship
+	wezterm
+	yabai
+	yazi
+	zsh
 )
 
 echo "Linking configs..."
 for pkg in "${STOW_PACKAGES[@]}"; do
 	if [ -d "$DOTFILES/$pkg" ]; then
 		mkdir -p "$XDG_CONFIG_HOME/$pkg"
-		stow -t "$XDG_CONFIG_HOME/$pkg" -d "$DOTFILES" "$pkg"
-		echo "  ✓ $pkg"
+		if stow -t "$XDG_CONFIG_HOME/$pkg" -d "$DOTFILES" "$pkg"; then
+			echo "  ✓ $pkg"
+		else
+			echo "  ✗ $pkg (failed)"
+		fi
 	fi
 done
 
-# --- Zsh (special case: links to $HOME) ---
-stow -t "$HOME" -d "$DOTFILES" zsh
-echo "  ✓ zsh"
+# --- .zshenv (must live in $HOME to bootstrap ZDOTDIR) ---
+stow -t "$HOME" -d "$DOTFILES" zshenv
+echo "  ✓ zshenv → ~"
 
 # --- Scripts to PATH ---
 stow -t "$HOME/.local/bin" -d "$DOTFILES" bin
@@ -83,4 +85,5 @@ fi
 echo "Setting macOS defaults..."
 source "$DOTFILES/macos-defaults.sh"
 
-echo "Done! Restart your shell."
+echo "Done! Restarting shell..."
+exec zsh -l

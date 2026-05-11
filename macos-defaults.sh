@@ -29,19 +29,23 @@ defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 
 # Screenshots
-defaults write com.apple.screencapture location-last -string "~/Documents/"
+defaults write com.apple.screencapture location -string "$HOME/Documents"
 
 # Mouse
 defaults write NSGlobalDomain com.apple.mouse.scaling -float 1.5
 
 # Keyboard shortcuts — disable input source switching (conflicts with IDE autocomplete)
-defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 '{ enabled = 0; }'
-defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 61 '{ enabled = 0; }'
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 '<dict><key>enabled</key><false/></dict>'
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 61 '<dict><key>enabled</key><false/></dict>'
 
 # Keyboard shortcuts — disable Switch to Desktop 1-12 (conflicts with editor shortcuts)
 for id in $(seq 15 26); do
-	defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add "$id" '{ enabled = 0; }'
+	defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add "$id" '<dict><key>enabled</key><false/></dict>'
 done
 
+# Hot corners — disable bottom-right (Notes by default)
+defaults write com.apple.dock wvous-br-corner -int 0
+
 # Restart affected apps
-killall Dock Finder
+/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+killall Dock Finder SystemUIServer

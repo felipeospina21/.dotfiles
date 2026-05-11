@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -uo pipefail
 
 DOTFILES="$(cd "$(dirname "$0")" && pwd)"
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
@@ -20,7 +20,7 @@ fi
 
 # --- Install packages from Brewfile ---
 echo "Installing packages..."
-brew bundle --file="$DOTFILES/Brewfile"
+brew bundle --file="$DOTFILES/Brewfile" || echo "⚠️  Some packages failed to install"
 
 # --- Linux-specific packages ---
 echo "Installing Linux packages..."
@@ -31,34 +31,38 @@ mkdir -p "$HOME/.local/bin" "$XDG_CONFIG_HOME"
 
 # --- Stow configs ---
 STOW_PACKAGES=(
-	nvim
-	starship
-	lazygit
-	lazydocker
-	wezterm
-	yazi
 	atuin
 	bottom
-	ripgrep
-	mise
 	i3
 	i3blocks
+	lazydocker
+	lazygit
+	mise
+	nvim
 	picom
+	ripgrep
 	rofi
+	starship
+	wezterm
+	yazi
+	zsh
 )
 
 echo "Linking configs..."
 for pkg in "${STOW_PACKAGES[@]}"; do
 	if [ -d "$DOTFILES/$pkg" ]; then
 		mkdir -p "$XDG_CONFIG_HOME/$pkg"
-		stow -t "$XDG_CONFIG_HOME/$pkg" -d "$DOTFILES" "$pkg"
-		echo "  ✓ $pkg"
+		if stow -t "$XDG_CONFIG_HOME/$pkg" -d "$DOTFILES" "$pkg"; then
+			echo "  ✓ $pkg"
+		else
+			echo "  ✗ $pkg (failed)"
+		fi
 	fi
 done
 
-# --- Zsh (links to $HOME) ---
-stow -t "$HOME" -d "$DOTFILES" zsh
-echo "  ✓ zsh"
+# --- .zshenv (must live in $HOME to bootstrap ZDOTDIR) ---
+stow -t "$HOME" -d "$DOTFILES" zshenv
+echo "  ✓ zshenv → ~"
 
 # --- Scripts to PATH ---
 stow -t "$HOME/.local/bin" -d "$DOTFILES" bin
@@ -78,4 +82,20 @@ if command -v mise &>/dev/null; then
 	mise install
 fi
 
-echo "Done! Restart your shell."
+# --- SSH key ---
+if [ ! -f "$HOME/.ssh/id_ed25519" ]; then
+	read -rp "Email for SSH key: " ssh_email
+	ssh-keygen -t ed25519 -C "$ssh_email" -f "$HOME/.ssh/id_ed25519" -N ""
+	eval "$(ssh-agent -s)"
+	ssh-add "$HOME/.ssh/id_ed25519"
+	echo ""
+	echo "⚠️  Add this SSH key to GitLab/GitHub:"
+	echo "   https://gitlab.com/-/user_settings/ssh_keys"
+	echo "   https://github.com/settings/ssh/new"
+	echo ""
+	cat "$HOME/.ssh/id_ed25519.pub"
+	echo ""
+fi
+
+echo "Done! Restarting shell..."
+exec zsh -l

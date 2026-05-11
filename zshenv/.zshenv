@@ -1,4 +1,6 @@
-# . "$HOME/.cargo/env"
+# stow command for .zshenv
+# stow: stow -d ~/.dotfiles -t ~ zshenv
+
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME=$XDG_CONFIG_HOME/local/share
 export XDG_CACHE_HOME=$XDG_CONFIG_HOME/cache
@@ -9,6 +11,10 @@ export ZDOTDIR=~/.config/zsh
 export EDITOR="nvim"
 
 export PATH="$HOME/.local/bin:$PATH"
+
+# cargo
+# shellcheck source=/dev/null
+[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
 # pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"

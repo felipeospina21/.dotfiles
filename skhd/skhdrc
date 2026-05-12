@@ -1,6 +1,13 @@
 # Launch Wezterm
 default < alt - return : open -na /Applications/Wezterm.app
 
+# Browsers
+default < alt - b : open -a /Applications/Firefox.app; open -a "/Applications/Google Chrome.app"
+
+# Messaging
+default < alt - m : open -a /Applications/Slack.app; open -a "/Applications/Microsoft Teams.app"
+
+
 # -- Moving Windows Around --
 
 # swap windows

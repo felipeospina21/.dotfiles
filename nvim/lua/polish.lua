@@ -14,3 +14,8 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.shiftwidth = 4
   end,
 })
+
+-- fix a bug with wezterm active pane bleeding into inactive one
+vim.api.nvim_create_autocmd("WinScrolled", {
+  callback = function() vim.cmd "redraw!" end,
+})

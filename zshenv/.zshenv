@@ -2,12 +2,13 @@
 # stow: stow -d ~/.dotfiles -t ~ zshenv
 
 export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME=$XDG_CONFIG_HOME/local/share
-export XDG_CACHE_HOME=$XDG_CONFIG_HOME/cache
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
 
-export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/.ripgreprc"
-export ZDOTDIR=~/.config/zsh
+export ZDOTDIR="$HOME/.config/zsh"
 export EDITOR="nvim"
 
 export PATH="$HOME/.local/bin:$PATH"
@@ -26,3 +27,6 @@ esac
 # shellcheck source=/dev/null
 # Source secrets if they exist
 [[ -f ~/.zsh_secrets ]] && source ~/.zsh_secrets
+
+## migrate to right XDG paths
+## rsync -a ~/.config/local/share/ ~/.local/share/ && rm -rf ~/.config/local/share && rsync -a ~/.config/cache/ ~/.cache/ && rm -rf ~/.config/cache && mkdir -p ~/.local/state && rmdir ~/.config/local 2>/dev/null; echo "Done"

@@ -1,3 +1,6 @@
+# Claude Access CLI completion
+fpath=(~/.claude-access/completions $fpath)
+
 zmodload zsh/complist
 _comp_options+=(globdots) # With hidden files
 

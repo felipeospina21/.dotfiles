@@ -8,7 +8,7 @@ return {
         if term.direction == "horizontal" then
           return 15
         elseif term.direction == "vertical" then
-          return vim.o.columns * 0.3
+          return math.max(100, vim.o.columns * 0.3)
         end
       end,
 

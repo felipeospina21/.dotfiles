@@ -44,7 +44,6 @@ return {
         signcolumn = "yes", -- sets vim.opt.signcolumn to yes
         wrap = false, -- sets vim.opt.wrap
 
-
         grepprg = "rg --vimgrep --smart-case",
         showtabline = 0,
         cmdheight = 1,
@@ -128,6 +127,22 @@ return {
             mrglab:toggle()
           end,
           desc = "Toggle mrglab",
+        },
+        ["<Leader>tj"] = {
+          function()
+            local Terminal = require("toggleterm.terminal").Terminal
+            local jiraf = Terminal:new {
+              cmd = "jiraf",
+              direction = "float",
+              hidden = true,
+              float_opts = { border = "rounded" },
+              on_open = function(term)
+                vim.keymap.set("t", "q", function() term:toggle() end, { buffer = term.bufnr })
+              end,
+            }
+            jiraf:toggle()
+          end,
+          desc = "Toggle jiraf",
         },
       },
     },

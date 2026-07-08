@@ -8,6 +8,7 @@ return {
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.toml" },
+  { import = "astrocommunity.pack.biome" },
   { import = "astrocommunity.pack.python", enabled = vim.fn.executable "python" == 1 },
   -- { import = "astrocommunity.pack.tailwindcss" },
   { import = "astrocommunity.pack.mdx" },

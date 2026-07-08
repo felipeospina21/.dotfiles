@@ -26,7 +26,7 @@ return {
           -- "python",
         },
       },
-      disabled = { 
+      disabled = {
         "tsserver",
         "eslint",
         "typescript-tools",
@@ -51,9 +51,6 @@ return {
         -- IMPORTANT: this is required for taplo LSP to work in non-git repositories
         root_dir = require("lspconfig.util").root_pattern("*.toml", ".git"),
       },
-      emmet_ls = {
-        enabled = false,
-      },
     },
     -- customize how language servers are attached
     handlers = {
@@ -62,6 +59,7 @@ return {
 
       -- the key is the server that is being setup with `vim.lsp.config`
       -- rust_analyzer = false, -- setting a handler to false will disable the set up of that language server
+      emmet_ls = false,
     },
     -- Configure buffer local auto commands to add when attaching a language server
     autocmds = {

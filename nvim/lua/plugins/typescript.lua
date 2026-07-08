@@ -17,10 +17,56 @@ local function decode_json(filename)
   return json
 end
 
-local format_filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" }
+local format_filetypes = {
+  "astro",
+  "css",
+  "graphql",
+  "javascript",
+  "javascriptreact",
+  "json",
+  "jsonc",
+  "svelte",
+  "typescript",
+  "typescriptreact",
+  "vue",
+}
 
 local function check_json_key_exists(json, ...) return vim.tbl_get(json, ...) ~= nil end
-local lsp_rooter, prettierrc_rooter
+local lsp_rooter, prettierrc_rooter, biome_rooter
+local has_biome = function(bufnr)
+  if type(bufnr) ~= "number" then bufnr = vim.api.nvim_get_current_buf() end
+  local rooter = require "astrocore.rooter"
+  if not lsp_rooter then
+    lsp_rooter = rooter.resolve("lsp", {
+      ignore = {
+        servers = function(client)
+          return not vim.tbl_contains({ "vtsls", "typescript-tools", "volar", "eslint", "tsserver" }, client.name)
+        end,
+      },
+    })
+  end
+  if not biome_rooter then
+    biome_rooter = rooter.resolve {
+      "biome.json",
+      "biome.jsonc",
+    }
+  end
+  local biome_dependency = false
+  for _, root in ipairs(require("astrocore").list_insert_unique(lsp_rooter(bufnr), { vim.fn.getcwd() })) do
+    local package_json = decode_json(root .. "/package.json")
+    if package_json and (
+      check_json_key_exists(package_json, "dependencies", "@biomejs/biome")
+      or check_json_key_exists(package_json, "devDependencies", "@biomejs/biome")
+      or check_json_key_exists(package_json, "dependencies", "biome")
+      or check_json_key_exists(package_json, "devDependencies", "biome")
+    ) then
+      biome_dependency = true
+      break
+    end
+  end
+  return biome_dependency or next(biome_rooter(bufnr))
+end
+
 local has_prettier = function(bufnr)
   if type(bufnr) ~= "number" then bufnr = vim.api.nvim_get_current_buf() end
   local rooter = require "astrocore.rooter"
@@ -67,10 +113,13 @@ local has_prettier = function(bufnr)
 end
 
 local null_ls_formatter = function(params)
-  if vim.tbl_contains(format_filetypes, params.filetype) then return has_prettier(params.bufnr) end
+  if vim.tbl_contains(format_filetypes, params.filetype) then return has_prettier(params.bufnr) and not has_biome(params.bufnr) end
   return true
 end
-local conform_formatter = function(bufnr) return has_prettier(bufnr) and { "prettierd" } or {} end
+local conform_formatter = function(bufnr)
+  if has_biome(bufnr) then return { "biome-check" } end
+  return has_prettier(bufnr) and { "prettierd" } or {}
+end
 
 return {
   { import = "astrocommunity.pack.json" },

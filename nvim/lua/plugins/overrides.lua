@@ -43,6 +43,11 @@ return {
         filetypes = { "markdown", "quarto", "rmd", "markdown.mdx" },
         hybrid_modes = { "i" },
       },
+      markdown = {
+        block_quotes = {
+          wrap = true,
+        },
+      },
     },
   },
   {

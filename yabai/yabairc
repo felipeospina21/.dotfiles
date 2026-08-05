@@ -36,7 +36,7 @@ yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Karabiner-Elements$" manage=off
 yabai -m rule --add app="^QuickTime Player$" manage=off
 
-yabai -m rule --add app="^WezTerm$" space=1
+yabai -m rule --add app="^WezTerm$" space=1 manage=off grid=20:20:3:0:14:20
 yabai -m rule --add app="^Firefox$" space=2
 yabai -m rule --add app="^Zoom$" space=^3
 yabai -m rule --add app="^Slack$" space=3

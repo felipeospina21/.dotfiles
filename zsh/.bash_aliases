@@ -14,6 +14,7 @@ alias mmdc='npx -p @mermaid-js/mermaid-cli mmdc'
 
 alias mac-keys='bat $DOTFILES/skhd/skhdrc'
 alias mks='mac-keys | fzf'
+alias sss='ss-status'
 
 # Git
 alias gb='git branch | fzf | xargs git checkout'

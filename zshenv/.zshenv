@@ -11,6 +11,8 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/.ripgreprc"
 export ZDOTDIR="$HOME/.config/zsh"
 export EDITOR="nvim"
 
+export CLAUDE_AUTOCOMPACT_PCT_OVERRIDE=50
+
 export PATH="$HOME/.local/bin:$PATH"
 
 # cargo

@@ -7,6 +7,11 @@ default < alt - 2: open -a /Applications/Firefox.app; open -a "/Applications/Goo
 # Messaging
 default < alt - 3 : open -a ~/Applications/Slack.app; open -a "/Applications/Microsoft Teams.app"
 
+# Make window float with 70% width
+shift + alt - f : yabai -m window --toggle float; yabai -m window --grid 20:20:3:0:14:14
+# Make window float with 70% width and full height
+shift + alt - g : yabai -m window --toggle float; yabai -m window --grid 20:20:3:0:14:20
+
 # -- Moving Windows Around --
 
 # swap windows

@@ -150,6 +150,13 @@ return {
       },
       ---@diagnostic disable: missing-fields
       config = {
+        biome = {
+          root_dir = function(fname, bufnr)
+            if not has_biome(bufnr) then return nil end
+            local util = require "lspconfig.util"
+            return util.root_pattern("biome.json", "biome.jsonc")(fname)
+          end,
+        },
         vtsls = {
           settings = {
             typescript = {
@@ -185,7 +192,11 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     opts = function(_, opts)
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "vtsls", "eslint" })
+      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "vtsls", "eslint", "biome" })
+      -- Exclude biome from automatic_enable; we start it conditionally
+      opts.automatic_enable = vim.tbl_deep_extend("force", opts.automatic_enable or {}, {
+        exclude = { "biome" },
+      })
     end,
   },
   {
@@ -208,6 +219,16 @@ return {
         local null_ls = require "null-ls"
         for _, method in ipairs(methods) do
           null_ls.register(null_ls.builtins[method][source_name].with { runtime_condition = null_ls_formatter })
+        end
+      end
+
+      -- Only register biome in null-ls when project uses biome
+      opts.handlers.biome = function(source_name, methods)
+        local null_ls = require "null-ls"
+        for _, method in ipairs(methods) do
+          null_ls.register(null_ls.builtins[method][source_name].with {
+            runtime_condition = function(params) return has_biome(params.bufnr) end,
+          })
         end
       end
     end,
@@ -235,7 +256,7 @@ return {
     opts = function(_, opts)
       opts.ensure_installed = require("astrocore").list_insert_unique(
         opts.ensure_installed,
-        { "vtsls", "eslint-lsp", "prettierd", "js-debug-adapter" }
+        { "vtsls", "eslint-lsp", "biome", "prettierd", "js-debug-adapter" }
       )
     end,
   },

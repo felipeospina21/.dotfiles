@@ -192,7 +192,7 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     opts = function(_, opts)
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "vtsls", "eslint", "biome" })
+      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "vtsls", "eslint", "biome", "cssls" })
       -- Exclude biome from automatic_enable; we start it conditionally
       opts.automatic_enable = vim.tbl_deep_extend("force", opts.automatic_enable or {}, {
         exclude = { "biome" },
@@ -256,7 +256,7 @@ return {
     opts = function(_, opts)
       opts.ensure_installed = require("astrocore").list_insert_unique(
         opts.ensure_installed,
-        { "vtsls", "eslint-lsp", "biome", "prettierd", "js-debug-adapter" }
+        { "vtsls", "eslint-lsp", "biome", "css-lsp", "prettierd", "js-debug-adapter" }
       )
     end,
   },

@@ -39,23 +39,23 @@ command=$(gum choose --header="$actionHeader" --header.foreground="#ffE9E9" --cu
 echo "$branches" | tr " " "\n" | while read -r branch; do
 	case $command in
 	pullrebase)
-		git pull origin "$branch" --rebase
+		git pull origin "$branch" --rebase 2>/dev/null
 		;;
 	rebase)
 		base_branch=$(get_branches 1)
 		git fetch origin
-		git checkout "$branch"
+		git checkout "$branch" 2>/dev/null
 		git rebase "origin/$base_branch"
 		;;
 	delete)
-		git branch -D "$branch"
+		git branch -D "$branch" 2>/dev/null
 		;;
 	update)
-		git checkout "$branch"
+		git checkout "$branch" 2>/dev/null
 		git pull --ff-only
 		;;
 	checkout)
-		git checkout "$branch"
+		git checkout "$branch" 2>/dev/null
 		;;
 	esac
 done

@@ -7,14 +7,31 @@ git_color_text() {
 }
 
 header="Choose $(git_color_text "branches") to operate on:"
+multiHeader="Choose $(git_color_text "branches") ($(git_color_text "tab")/$(git_color_text "x") to toggle, enter to confirm):"
 actionHeader="Choose a $(git_color_text "command"):"
 
 get_branches() {
 	# shellcheck disable=2046
 	if [ "${1+x}" ]; then
-		gum choose --header="$header" --header.foreground="#ffE9E9" --selected.foreground="$GIT_COLOR" --limit="$1" $(git branch --format="%(refname:short)")
+		gum choose \
+			--header="$header" --header.foreground="#ffE9E9" \
+			--cursor.foreground="$GIT_COLOR" \
+			--selected.foreground="$GIT_COLOR" \
+			--limit="$1" \
+			$(git branch --format="%(refname:short)")
 	else
-		gum choose --header="$header" --header.foreground="#ffE9E9" --selected.foreground="$GIT_COLOR" --no-limit $(git branch --format="%(refname:short)")
+		# NOTE: gum 2.0.0 has a regression where <space> does not toggle
+		# multi-select items (charmbracelet/gum#1143). Use <tab> or <x> instead.
+		gum choose \
+			--header="$multiHeader" --header.foreground="#ffE9E9" \
+			--cursor.foreground="$GIT_COLOR" \
+			--selected.foreground="$GIT_COLOR" \
+			--cursor-prefix="[ ] " \
+			--unselected-prefix="[ ] " \
+			--selected-prefix="[✓] " \
+			--show-help \
+			--no-limit \
+			$(git branch --format="%(refname:short)")
 	fi
 }
 

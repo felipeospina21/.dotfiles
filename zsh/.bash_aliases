@@ -41,7 +41,7 @@ alias outdated='npx npm-check-updates -i --format group'
 alias jlm='jira issue list -a$(jira me)'
 
 # Brew
-alias brewup='brew outdated $(brew leaves) $(brew list --cask) | gum choose --no-limit | xargs brew upgrade'
+alias brewup='brew upgrade $(brew outdated $(brew leaves) $(brew list --cask) | gum choose --no-limit)'
 
 # tok -> update project token
 function tok {
@@ -134,8 +134,14 @@ function lt {
 }
 
 function git_pull_and_install {
-	isNewPackage=$(git pull | grep "package.json")
-	if [[ $isNewPackage ]]; then
+	# Extract only the dependency sections of package.json (ignores version, scripts, etc.)
+	deps_before=$(git show HEAD:package.json 2>/dev/null | jq -S '{dependencies, devDependencies, peerDependencies, optionalDependencies}' 2>/dev/null)
+
+	git pull
+
+	deps_after=$(jq -S '{dependencies, devDependencies, peerDependencies, optionalDependencies}' package.json 2>/dev/null)
+
+	if [[ "$deps_before" != "$deps_after" ]]; then
 		packageManager=$(gum confirm "Install new packages?" && gum choose "npm" "pnpm" "yarn")
 		if [[ $packageManager ]]; then
 			"$packageManager" install

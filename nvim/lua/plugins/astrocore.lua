@@ -144,6 +144,22 @@ return {
           end,
           desc = "Toggle jiraf",
         },
+        ["<Leader>td"] = {
+          function()
+            local Terminal = require("toggleterm.terminal").Terminal
+            local lazydocker = Terminal:new {
+              cmd = "lazydocker",
+              direction = "float",
+              hidden = true,
+              float_opts = { border = "rounded" },
+              on_open = function(term)
+                vim.keymap.set("t", "q", function() term:toggle() end, { buffer = term.bufnr })
+              end,
+            }
+            lazydocker:toggle()
+          end,
+          desc = "Toggle lazydocker",
+        },
       },
     },
   },

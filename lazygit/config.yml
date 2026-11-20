@@ -25,6 +25,26 @@ gui:
       - "#FF838B"
     defaultFgColor:
       - "#ADB0BB"
-
 os:
   editPreset: "nvim"
+customCommands:
+  # gpb --no-verify -> push current branch to origin, skipping hooks
+  # mnemonic: alt+p = Push
+  - key: "<alt+p>"
+    context: "global"
+    description: "Push current branch to origin, no-verify (gpb --no-verify)"
+    command: "git push origin {{.CheckedOutBranch.Name | quote}} --no-verify"
+    loadingText: "Pushing to origin (no-verify)..."
+    output: log
+  # gpbf -> force-with-lease push current branch to origin (no verify)
+  # mnemonic: alt+shift+p = force Push
+  - key: "<alt+shift+p>"
+    context: "global"
+    description: "Force-with-lease push current branch (gpbf)"
+    command: "git push origin {{.CheckedOutBranch.Name | quote}} --no-verify --force-with-lease"
+    loadingText: "Force pushing to origin..."
+    prompts:
+      - type: "confirm"
+        title: "Force Push (with lease)"
+        body: "Force-with-lease push '{{.CheckedOutBranch.Name}}' to origin? This rewrites remote history."
+    output: log

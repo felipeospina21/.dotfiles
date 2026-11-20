@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Posting `editor` wrapper (set `editor: gql-edit` in posting/config.yaml).
+# Opens GraphQL text in nvim inside the queries collection so graphql-lsp finds
+# graphql.config.yml. Other file types (json, yaml, ...) open in plain nvim.
+# Override the collection location with POSTING_GQL_ROOT.
+f="$1"
+echo "$(date '+%F %T') $f" >> "${TMPDIR:-/tmp}/posting-editor.log"
+case "$f" in
+  *.json|*.yaml|*.yml|*.html|*.xml|*.css) exec nvim "$@" ;;
+esac
+root="${POSTING_GQL_ROOT:-$HOME/projects/disney/queries}"
+tmp="$root/.scratch/edit.graphql"
+mkdir -p "$root/.scratch"
+cp "$f" "$tmp"
+cd "$root" && nvim "$tmp"
+cp "$tmp" "$f"

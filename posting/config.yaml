@@ -1,0 +1,13 @@
+theme: cyberdeck
+layout: horizontal # request and response side by side, which suits long queries
+use_host_environment: false # set true to read shell variables such as $STAGING_TOKEN
+editor: /Users/felipe.ospina/.config/posting/gql-edit.sh # wrapper: opens GraphQL text in nvim with the schema LSP (plain nvim for JSON/YAML/etc.)
+
+focus:
+  on_request: body
+  on_response: body
+  on_startup: collection
+
+url_bar:
+  hide_secrets_in_value_preview: true
+  show_value_preview: false

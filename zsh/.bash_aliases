@@ -43,12 +43,24 @@ alias jlm='jira issue list -a$(jira me)'
 # Brew
 alias brewup='brew upgrade $(brew outdated $(brew leaves) $(brew list --cask) | gum choose --no-limit)'
 
-# tok -> update project token
+# tok -> update ID_TOKEN in project .env.local, preserving other vars
 function tok {
 	token=$(gum input --password --char-limit 9999 --placeholder "paste token...")
 	if [ -n "$token" ]; then
-		echo "ID_TOKEN=$token" >.env.local
-		echo "token updated in $PWD/.env.local"
+		local env_file=".env.local"
+		if [ -f "$env_file" ] && grep -q '^ID_TOKEN=' "$env_file"; then
+			# Replace existing ID_TOKEN line in place, preserving other vars
+			local tmp
+			tmp=$(mktemp)
+			ID_TOKEN="$token" awk '
+				/^ID_TOKEN=/ { print "ID_TOKEN=" ENVIRON["ID_TOKEN"]; next }
+				{ print }
+			' "$env_file" >"$tmp" && mv "$tmp" "$env_file"
+		else
+			# Append if file is new or ID_TOKEN not present
+			echo "ID_TOKEN=$token" >>"$env_file"
+		fi
+		echo "token updated in $PWD/$env_file"
 	fi
 }
 
